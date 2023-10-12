@@ -1,0 +1,71 @@
+import { Link } from "react-router-dom";
+import { Logo } from "../../assets";
+import DropdownUser from "../DropdownUser/DropdownUser";
+
+const Header = ({ sidebarOpen, setSidebarOpen }) => {
+  return (
+    <header className="sticky top-0 z-[999] flex w-full bg-white shadow">
+      <div className="flex flex-grow items-center justify-between py-4 px-4 md:px-6 2xl:px-11">
+        <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
+          {/* Hamburger Toogle Button Start */}
+          <button
+            aria-controls="sidebar"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSidebarOpen(!sidebarOpen);
+            }}
+            className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm lg:hidden"
+          >
+            <span className="relative block h-5 w-5 cursor-pointer">
+              <span className="du-block absolute right-0 h-full w-full">
+                <span
+                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out ${
+                    !sidebarOpen && "!w-full delay-300"
+                  }`}
+                ></span>
+                <span
+                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out ${
+                    !sidebarOpen && "delay-400 !w-full"
+                  }`}
+                ></span>
+                <span
+                  className={`relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out  ${
+                    !sidebarOpen && "!w-full delay-500"
+                  }`}
+                ></span>
+              </span>
+              <span className="absolute right-0 h-full w-full rotate-45">
+                <span
+                  className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out ${
+                    !sidebarOpen && "!h-0 !delay-[0]"
+                  }`}
+                ></span>
+                <span
+                  className={`delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out ${
+                    !sidebarOpen && "!h-0 !delay-200"
+                  }`}
+                ></span>
+              </span>
+            </span>
+          </button>
+          {/* Hamburger Toogle Button End */}
+
+          <Link className="block flex-shrink-0 lg:hidden" to="/">
+            <img src={Logo} alt="Logo" className="w-[60px]" />
+          </Link>
+        </div>
+        <div>
+          <h2 className="font-semibold md:text-2xl uppercase text-[#1C2434}">
+            Al Aqsa Foundation
+          </h2>
+        </div>
+
+        {/* Dropdown User Start */}
+        <DropdownUser />
+        {/* Dropdown User End */}
+      </div>
+    </header>
+  );
+};
+
+export default Header;
