@@ -3,7 +3,8 @@ import { ModalContext } from "../../contextApi/ModalContextApi";
 import { RxCross2 } from "react-icons/rx";
 
 const Modal = () => {
-  const { setShowModal, title, btn } = useContext(ModalContext);
+  const { setShowModal, title, btn, modalContent, btnAction } =
+    useContext(ModalContext);
 
   return (
     <div>
@@ -20,26 +21,21 @@ const Modal = () => {
             </div>
             {/*body*/}
             <div className="p-6">
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Dolorem explicabo molestias distinctio est provident. Illum quas
-                rerum soluta culpa quaerat eos. Amet sit eos ipsa mollitia
-                eveniet repellendus, consequatur accusantium.
-              </p>
+              <p>{modalContent}</p>
             </div>
             {/*footer*/}
-            <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200">
+            <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 gap-4">
               <button
-                className="text-red-600 font-semibold px-6"
+                className="border-2 font-semibold py-2 px-4 rounded-md"
                 type="button"
                 onClick={() => setShowModal(false)}
               >
-                Close
+                Cancel
               </button>
               <button
-                className="bg-[#1C2434] text-[#C6CCD7] py-3 px-4 rounded-md"
+                className="bg-red-700 border-2 border-red-700 text-white py-2 px-4 rounded-md"
                 type="button"
-                onClick={() => setShowModal(false)}
+                onClick={btnAction}
               >
                 {btn}
               </button>

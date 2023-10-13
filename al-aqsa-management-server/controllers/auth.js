@@ -1,4 +1,4 @@
-const { hashPassword } = require("../helpers/auth");
+const { hashPassword, comparePassword } = require("../helpers/auth");
 const User = require("../models/user");
 
 // user register controller
@@ -117,12 +117,49 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// update user
+// get user by id controller
+const getUserById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const options = { password: 0 };
+
+    const user = await User.findById(id, options);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "No user found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    return res.status(404).json({ success: false, message: "No user found" });
+  }
+};
+
+// update user controller
 const updateUser = async (req, res) => {
   try {
     const id = req.params.id;
     const update = req.body;
-    const user = await User.findByIdAndUpdate(id, update);
+    const { password } = update;
+    let hashedPassword = "";
+
+    if (password) {
+      if (!password || password.length < 6)
+        return res.status(400).json({
+          success: false,
+          message: "Password must be atleast 6 characters",
+        });
+      hashedPassword = await hashPassword(password);
+    }
+
+    const updateUserInfo = password
+      ? { ...update, password: hashedPassword }
+      : update;
+
+    const user = await User.findByIdAndUpdate(id, updateUserInfo);
 
     if (!user) {
       return res.status(404).json({ success: false, message: "No user found" });
@@ -137,4 +174,76 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, getAllUsers, updateUser };
+// delete user controller
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "No user found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Deleted successfully",
+    });
+  } catch (error) {
+    return res.status(404).json({ success: false, message: "No user found" });
+  }
+};
+
+// user login controller
+const userLogin = async (req, res) => {
+  try {
+    const { userName, password } = req.body;
+
+    if (!userName)
+      return res.status(400).json({
+        success: false,
+        message: "Username is required",
+      });
+
+    if (!password)
+      return res.status(400).json({
+        success: false,
+        message: "Password is required",
+      });
+
+    const existingUser = await User.findOne({ userName });
+    if (!existingUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User no found with this username",
+      });
+    }
+
+    const isPasswordMatched = await comparePassword(
+      password,
+      existingUser.password
+    );
+
+    if (!isPasswordMatched) {
+      return res.status(400).json({
+        success: false,
+        message: "username/password did not match",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Login Successfully",
+    });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+module.exports = {
+  registerUser,
+  getAllUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+  userLogin,
+};

@@ -30,7 +30,7 @@ const MainLayout = () => {
             >
               <Outlet />
               {showModal && (
-                <div className="absolute md:top-[80px] top-5 lg:left-[150px]">
+                <div className="absolute md:top-[80px] top-5 lg:left-[350px]">
                   <Modal />
                 </div>
               )}

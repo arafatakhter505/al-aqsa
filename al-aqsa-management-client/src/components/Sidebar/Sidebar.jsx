@@ -63,7 +63,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 <li
                   key={index}
                   onClick={() => setShowModal(false)}
-                  className={`p-2 rounded-md text-lg border-b border-gray-700 ${
+                  className={`p-2 rounded-md text-lg border-b border-gray-700 hover:bg-[#333A48] ${
                     pathname === path && "bg-[#333A48]"
                   }`}
                 >

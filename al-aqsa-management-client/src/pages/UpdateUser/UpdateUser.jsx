@@ -1,91 +1,90 @@
 import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { PageHeader, Spinner } from "../../components";
 import { RiArrowDropDownLine, RiLockPasswordLine } from "react-icons/ri";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import dev from "../../config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const AddUser = () => {
+const UpdateUser = () => {
+  const { id } = useParams();
+  const [user, setUser] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("viewer");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [userNameError, setUserNameError] = useState("");
+  const [status, setStatus] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
-  const userNamePattern = /^[a-zA-Z0-9_]+$/;
 
-  // user name validation
-  const userNameValidation = () => {
-    if (userName.length < 3 || userName.length > 20) {
-      return setUserNameError("Username must be 3 to 20 characters long");
-    } else if (!userNamePattern.test(userName)) {
-      return setUserNameError(
-        "Username can only contain letters, numbers, and underscores"
-      );
-    } else {
-      setUserNameError("");
+  // get user
+  useEffect(() => {
+    try {
+      fetch(`${dev.serverUrl}/api/users/${id}`)
+        .then((res) => res.json())
+        .then((data) => setUser(data.user));
+    } catch (error) {
+      toast.error(error.message);
     }
-  };
+  }, []);
+
+  // set user info
+  useEffect(() => {
+    setFullName(user?.fullName);
+    setUserName(user?.userName);
+    setEmail(user?.email);
+    setRole(user?.role);
+    setStatus(user?.isBlocked);
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // check password
-    if (password !== confirmPassword)
-      return toast.error("Password does not match");
-    if (password.length < 6) {
-      return toast.error("Password must be atleast 6 characters");
+    if (password) {
+      if (password.length < 6) {
+        return toast.error("Password must be atleast 6 characters");
+      }
     }
 
-    const user = {
+    const updateInfo = {
       fullName,
-      userName,
-      email,
-      password,
       role,
+      isBlocked: status,
     };
+
+    const updateUserInfo = password ? { ...updateInfo, password } : updateInfo;
 
     // fetch data
     try {
       setSubmitLoading(true);
-      const response = await fetch(`${dev.serverUrl}/api/users/register`, {
-        method: "POST",
+      const response = await fetch(`${dev.serverUrl}/api/users/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(updateUserInfo),
       });
-      const createUser = await response.json();
-      if (createUser.success) {
-        toast.success(createUser.message);
+      const updateUser = await response.json();
+      if (updateUser.success) {
+        toast.success(updateUser.message);
         setSubmitLoading(false);
-        setFullName("");
-        setUserName("");
-        setEmail("");
-        setRole("viewer");
-        setPassword("");
-        setConfirmPassword("");
         setShowPassword(false);
         navigate("/user");
       } else {
         setSubmitLoading(false);
-        toast.error(createUser.message);
+        toast.error(updateUser.message);
       }
     } catch (error) {
       setSubmitLoading(false);
       toast.error(error.message);
     }
   };
-
   return (
     <div>
       <PageHeader
-        title="Add New User"
+        title="Update User"
         btnText="All Users"
         icon="back"
         path="/user"
@@ -119,8 +118,8 @@ const AddUser = () => {
                   placeholder="Enter user name"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  onBlur={userNameValidation}
-                  className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+                  readOnly
+                  className="w-full rounded-lg border bg-gray-100 py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                   required
                 />
 
@@ -128,7 +127,6 @@ const AddUser = () => {
                   <AiOutlineUser />
                 </span>
               </div>
-              {userNameError && <p className="text-red-500">{userNameError}</p>}
             </div>
           </div>
 
@@ -141,7 +139,8 @@ const AddUser = () => {
                   placeholder="Enter email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+                  readOnly
+                  className="w-full rounded-lg border bg-gray-100 py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                   required
                 />
 
@@ -182,7 +181,6 @@ const AddUser = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
-                  required
                 />
 
                 <span className="absolute right-4 top-4 text-2xl text-gray-400">
@@ -192,21 +190,20 @@ const AddUser = () => {
             </div>
 
             <div className="w-full">
-              <label className="mb-2.5 block text-black">
-                Confirm Password
-              </label>
+              <label className="mb-2.5 block text-black">User Status</label>
               <div className="relative">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter confirm password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+                <select
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="relative z-20 w-full appearance-none rounded border bg-transparent py-4 px-6 outline-none transition focus:border-primary active:border-primary"
                   required
-                />
+                >
+                  <option value={false}>Active</option>
+                  <option value={true}>Block</option>
+                </select>
 
                 <span className="absolute right-4 top-4 text-2xl text-gray-400">
-                  <RiLockPasswordLine />
+                  <RiArrowDropDownLine />
                 </span>
               </div>
             </div>
@@ -228,7 +225,7 @@ const AddUser = () => {
                 className="bg-[#1C2434] text-[#C6CCD7] font-semibold px-6 py-3 rounded-md"
                 disabled={submitLoading}
               >
-                {submitLoading ? <Spinner /> : "Add User"}
+                {submitLoading ? <Spinner /> : "Update User"}
               </button>
             </div>
           </div>
@@ -238,4 +235,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default UpdateUser;

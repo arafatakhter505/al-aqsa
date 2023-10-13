@@ -1,7 +1,8 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import UserTableRow from "./UserTableRow";
+import { Loading } from "../../components";
 
-const UserTable = ({ data, filter }) => {
+const UserTable = ({ data, filter, refetch, isLoading }) => {
   const { users, pagination } = data;
   const { search, setSearch, setPage, limit, setLimit } = filter;
 
@@ -30,70 +31,79 @@ const UserTable = ({ data, filter }) => {
           </select>
         </div>
       </div>
-      <div className="w-full bg-white shadow-md rounded my-6">
-        <div className="overflow-x-auto">
-          <table className="w-full bg-white">
-            <thead>
-              <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">Name</th>
-                <th className="py-3 px-6 text-left">User Name</th>
-                <th className="py-3 px-6 text-left">Email</th>
-                <th className="py-3 px-6 text-center">Role</th>
-                <th className="py-3 px-6 text-center">Status</th>
-                <th className="py-3 px-6 text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-600">
-              {users &&
-                users.map((user, index) => (
-                  <UserTableRow key={user._id} index={index} user={user} />
-                ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="w-full p-4 justify-center items-center flex">
-          {data?.succes ? (
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setPage(pagination?.previousPage)}
-                disabled={pagination?.previousPage === null && true}
-                className={`flex items-center gap-2 ${
-                  pagination?.previousPage === null && "text-gray-600"
-                }`}
-              >
-                <BsArrowLeft />
-                Previous
-              </button>
-              <div className="flex items-center gap-2">
-                {Array.from({ length: pagination?.totalPage }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setPage(index + 1)}
-                    className={`px-4 py-2 ${
-                      pagination?.currentPage === index + 1 &&
-                      "rounded-md bg-[#1C2434] text-[#C6CCD7]"
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="w-full bg-white shadow-md rounded my-6">
+          <div className="overflow-x-auto">
+            <table className="w-full bg-white">
+              <thead>
+                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                  <th className="py-3 px-6 text-left">Name</th>
+                  <th className="py-3 px-6 text-left">User Name</th>
+                  <th className="py-3 px-6 text-left">Email</th>
+                  <th className="py-3 px-6 text-center">Role</th>
+                  <th className="py-3 px-6 text-center">Status</th>
+                  <th className="py-3 px-6 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-600">
+                {users &&
+                  users.map((user, index) => (
+                    <UserTableRow
+                      key={user._id}
+                      index={index}
+                      user={user}
+                      refetch={refetch}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="w-full p-4 justify-center items-center flex">
+            {data?.success ? (
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => setPage(pagination?.previousPage)}
+                  disabled={pagination?.previousPage === null && true}
+                  className={`flex items-center gap-2 ${
+                    pagination?.previousPage === null && "text-gray-600"
+                  }`}
+                >
+                  <BsArrowLeft />
+                  Previous
+                </button>
+                <div className="flex items-center gap-2">
+                  {Array.from({ length: pagination?.totalPage }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setPage(index + 1)}
+                      className={`px-4 py-2 ${
+                        pagination?.currentPage === index + 1 &&
+                        "rounded-md bg-[#1C2434] text-[#C6CCD7]"
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  onClick={() => setPage(pagination?.nextPage)}
+                  disabled={pagination?.nextPage === null && true}
+                  className={`flex items-center gap-2 ${
+                    pagination?.nextPage === null && "text-gray-600"
+                  }`}
+                >
+                  Next
+                  <BsArrowRight />
+                </button>
               </div>
-              <button
-                onClick={() => setPage(pagination?.nextPage)}
-                disabled={pagination?.nextPage === null && true}
-                className={`flex items-center gap-2 ${
-                  pagination?.nextPage === null && "text-gray-600"
-                }`}
-              >
-                Next
-                <BsArrowRight />
-              </button>
-            </div>
-          ) : (
-            <div>{data?.message}</div>
-          )}
+            ) : (
+              <div>{data?.message}</div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
