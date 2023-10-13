@@ -1,18 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Logo } from "../../assets";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Spinner } from "../../components";
 import dev from "../../config";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -33,7 +37,9 @@ const Login = () => {
         setUserName("");
         setPassword("");
         setShowPassword(false);
-        navigate("/");
+        setUser(loginUser.user);
+        localStorage.setItem("user", JSON.stringify(loginUser.user));
+        navigate(from, { replace: true });
       } else {
         setSubmitLoading(false);
         toast.error(loginUser.message);
@@ -47,7 +53,7 @@ const Login = () => {
   return (
     <div className="bg-[#1C2434] min-h-screen flex items-center justify-center">
       <div className="md:w-[385px] w-full mx-5 bg-white px-5 pb-5 pt-2 rounded shadow-2xl relative">
-        <div className="flex justify-center">
+        <div className="flex justify-center h-[140px]">
           <img src={Logo} alt="Logo" className="w-[140px]" />
         </div>
         <form onSubmit={handleLogin}>
