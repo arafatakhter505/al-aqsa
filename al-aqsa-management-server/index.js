@@ -4,6 +4,7 @@ const { rateLimit } = require("express-rate-limit");
 const connectDb = require("./config/db");
 const userRouter = require("./routes/auth");
 const cors = require("cors");
+const memberRouter = require("./routes/member");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 
 // routes middleware
 app.use("/api/users", userRouter);
+app.use("/api/members", memberRouter);
 
 app.get("/", (req, res) => res.send("Al Aqsa Server Application"));
 

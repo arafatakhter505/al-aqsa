@@ -181,8 +181,14 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const id = req.params.id;
-    const user = await User.findByIdAndDelete(id);
+    const superAdmin = await User.findById(id);
+    if (superAdmin.role === "Super Admin") {
+      return res
+        .status(400)
+        .json({ success: false, message: "Can't delete super admin" });
+    }
 
+    const user = await User.findByIdAndDelete(id);
     if (!user) {
       return res.status(404).json({ success: false, message: "No user found" });
     }
@@ -230,6 +236,13 @@ const userLogin = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "username/password did not match",
+      });
+    }
+
+    if (existingUser.isBlocked) {
+      return res.status(400).json({
+        success: false,
+        message: "User is blocked",
       });
     }
 

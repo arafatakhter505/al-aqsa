@@ -61,22 +61,26 @@ const UserTableRow = ({ user, index, refetch }) => {
         )}
       </td>
       <td className="py-3 px-6 text-center">
-        <div className="flex item-center justify-end gap-2">
-          <Link
-            to={`/update-user/${user?._id}`}
-            className="flex items-center gap-1 bg-green-900 text-white px-3 py-2 rounded-md"
-          >
-            <AiOutlineEdit />
-            Edit
-          </Link>
-          <button
-            onClick={handleModal}
-            className="flex items-center gap-1 bg-red-700 text-white px-3 py-2 rounded-md"
-          >
-            <BsTrash />
-            Delete
-          </button>
-        </div>
+        {user?.role === "Super Admin" ? (
+          "No Action"
+        ) : (
+          <div className="flex item-center justify-end gap-2">
+            <Link
+              to={`/update-user/${user?._id}`}
+              className="flex items-center gap-1 bg-green-900 text-white px-3 py-2 rounded-md"
+            >
+              <AiOutlineEdit />
+              Edit
+            </Link>
+            <button
+              onClick={handleModal}
+              className="flex items-center gap-1 bg-red-700 text-white px-3 py-2 rounded-md"
+            >
+              <BsTrash />
+              Delete
+            </button>
+          </div>
+        )}
       </td>
     </tr>
   );

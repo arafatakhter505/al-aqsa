@@ -38,10 +38,6 @@ const App = () => {
                   <Route key={index} path={path} element={<Component />} />
                 );
               })}
-            {/* {routes.map((route, index) => {
-              const { path, component: Component } = route;
-              return <Route key={index} path={path} element={<Component />} />;
-            })} */}
           </Route>
         </Route>
         <Route path="*" element={<Error />} />
