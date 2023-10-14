@@ -5,6 +5,7 @@ const connectDb = require("./config/db");
 const userRouter = require("./routes/auth");
 const cors = require("cors");
 const memberRouter = require("./routes/member");
+const donationRouter = require("./routes/donation");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 // routes middleware
 app.use("/api/users", userRouter);
 app.use("/api/members", memberRouter);
+app.use("/api/donation", donationRouter);
 
 app.get("/", (req, res) => res.send("Al Aqsa Server Application"));
 

@@ -154,7 +154,7 @@ const UpdateMember = () => {
               className="w-full bg-[#1C2434] text-[#C6CCD7] font-semibold px-6 py-3 rounded-md"
               disabled={submitLoading}
             >
-              {submitLoading ? <Spinner /> : "Add Member"}
+              {submitLoading ? <Spinner /> : "Update Member"}
             </button>
           </div>
         </form>

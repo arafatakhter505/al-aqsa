@@ -42,7 +42,7 @@ const addDonation = async (req, res) => {
   }
 };
 
-// get all donations controller
+// get all donation controller
 const getAllDonation = async (req, res) => {
   try {
     const search = req.query.search || "";
@@ -51,7 +51,12 @@ const getAllDonation = async (req, res) => {
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = { name: { $regex: searchRegExp } };
+    const filter = {
+      $or: [
+        { donerName: { $regex: searchRegExp } },
+        { comment: { $regex: searchRegExp } },
+      ],
+    };
 
     const donations = await Donation.find(filter)
       .limit(limit)

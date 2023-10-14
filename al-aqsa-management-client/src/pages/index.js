@@ -9,6 +9,9 @@ import UpdateProfile from "./UpdateProfile/UpdateProfile";
 import Error from "./Error/Error";
 import AddMember from "./AddMember/AddMember";
 import UpdateMember from "./UpdateMember/UpdateMember";
+import Donation from "./Donation/Donation";
+import AddDonation from "./AddDonation/AddDonation";
+import UpdateDonation from "./UpdateDonation/UpdateDonation";
 
 export {
   Dashboard,
@@ -22,4 +25,7 @@ export {
   Error,
   AddMember,
   UpdateMember,
+  Donation,
+  AddDonation,
+  UpdateDonation,
 };

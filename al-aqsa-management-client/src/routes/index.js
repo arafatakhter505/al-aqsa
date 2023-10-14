@@ -1,4 +1,4 @@
-import { Dashboard, Member, User } from "../pages";
+import { Dashboard, Donation, Member, User } from "../pages";
 import { LuLayoutDashboard, LuUsers } from "react-icons/lu";
 import { LiaChalkboardTeacherSolid, LiaDonateSolid } from "react-icons/lia";
 import { GiExpense } from "react-icons/gi";
@@ -24,7 +24,7 @@ const routes = [
   {
     path: "/donation",
     title: "Donation",
-    component: Member,
+    component: Donation,
     icon: LiaDonateSolid,
     show: ["Super Admin", "Admin", "Viewer", "Editor"],
   },

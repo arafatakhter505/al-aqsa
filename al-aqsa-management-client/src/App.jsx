@@ -2,11 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import routes from "./routes";
 import {
+  AddDonation,
   AddMember,
   AddUser,
   Error,
   Login,
   Profile,
+  UpdateDonation,
   UpdateMember,
   UpdateProfile,
   UpdateUser,
@@ -34,6 +36,8 @@ const App = () => {
             <Route path="/update-profile/:id" element={<UpdateProfile />} />
             <Route path="/add-member" element={<AddMember />} />
             <Route path="/update-member/:id" element={<UpdateMember />} />
+            <Route path="/add-donation" element={<AddDonation />} />
+            <Route path="/update-donation/:id" element={<UpdateDonation />} />
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

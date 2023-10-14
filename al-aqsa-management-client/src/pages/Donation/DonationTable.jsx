@@ -1,9 +1,9 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Loading } from "../../components";
-import MemberTableRow from "./MemberTableRow";
+import DonationTableRow from "./DonationTableRow";
 
-const MemberTable = ({ data, filter, refetch, isLoading }) => {
-  const { members, pagination } = data;
+const DonationTable = ({ data, filter, refetch, isLoading }) => {
+  const { donations, pagination } = data;
   const { search, setSearch, setPage, limit, setLimit } = filter;
 
   return (
@@ -39,19 +39,21 @@ const MemberTable = ({ data, filter, refetch, isLoading }) => {
             <table className="min-w-max w-full table-auto">
               <thead>
                 <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">Name</th>
-                  <th className="py-3 px-6 text-left">Position</th>
-                  <th className="py-3 px-6 text-center">Contact</th>
+                  <th className="py-3 px-6 text-left">Date</th>
+                  <th className="py-3 px-6 text-left">Donar Name</th>
+                  <th className="py-3 px-6 text-center">Amount</th>
+                  <th className="py-3 px-6 text-center">Comment</th>
+                  <th className="py-3 px-6 text-center">Last Update</th>
                   <th className="py-3 px-6 text-center">Actions</th>
                 </tr>
               </thead>
               <tbody className="text-gray-600">
-                {members &&
-                  members.map((member, index) => (
-                    <MemberTableRow
-                      key={member._id}
+                {donations &&
+                  donations.map((item, index) => (
+                    <DonationTableRow
+                      key={item._id}
                       index={index}
-                      member={member}
+                      donation={item}
                       refetch={refetch}
                     />
                   ))}
@@ -106,4 +108,4 @@ const MemberTable = ({ data, filter, refetch, isLoading }) => {
   );
 };
 
-export default MemberTable;
+export default DonationTable;
