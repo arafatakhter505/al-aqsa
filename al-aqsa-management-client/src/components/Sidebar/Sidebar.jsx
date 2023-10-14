@@ -3,11 +3,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Logo } from "../../assets";
 import routes from "./../../routes/index";
 import { ModalContext } from "../../contextApi/ModalContextApi";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const { pathname } = location;
   const { setShowModal } = useContext(ModalContext);
+  const { user } = useContext(AuthContext);
 
   // close on click outside
   useEffect(() => {
@@ -57,27 +59,29 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         {/* Sidebar Menu Start */}
         <nav className="px-4 lg:mt-9 lg:px-6">
           <ul className="mb-6 flex flex-col gap-1.5">
-            {routes.map((route, index) => {
-              const { path, title, icon: Icon } = route;
-              return (
-                <li
-                  key={index}
-                  onClick={() => setShowModal(false)}
-                  className={`p-2 rounded-md text-lg border-b border-gray-700 hover:bg-[#333A48] ${
-                    pathname === path && "bg-[#333A48]"
-                  }`}
-                >
-                  <NavLink
-                    to={path}
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                    className="w-full flex items-center gap-2"
+            {routes
+              .filter((item) => item.show.indexOf(user?.role) !== -1)
+              .map((route, index) => {
+                const { path, title, icon: Icon } = route;
+                return (
+                  <li
+                    key={index}
+                    onClick={() => setShowModal(false)}
+                    className={`p-2 rounded-md text-lg border-b border-gray-700 hover:bg-[#333A48] ${
+                      pathname === path && "bg-[#333A48]"
+                    }`}
                   >
-                    <Icon />
-                    {title}
-                  </NavLink>
-                </li>
-              );
-            })}
+                    <NavLink
+                      to={path}
+                      onClick={() => setSidebarOpen(!sidebarOpen)}
+                      className="w-full flex items-center gap-2"
+                    >
+                      <Icon />
+                      {title}
+                    </NavLink>
+                  </li>
+                );
+              })}
           </ul>
         </nav>
         {/* Sidebar Menu End */}

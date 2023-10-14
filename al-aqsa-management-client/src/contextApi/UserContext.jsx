@@ -1,17 +1,55 @@
 import { createContext, useEffect, useState } from "react";
+import dev from "../config";
 
 export const AuthContext = createContext();
 
 const UserContext = ({ children }) => {
   const getUser = localStorage.getItem("user");
-  const [user, setUser] = useState(JSON.parse(getUser));
-  const [authLoading, setAuthLoading] = useState(true);
+  const [authUser, setAuthUser] = useState(
+    JSON.parse(getUser || JSON.stringify({}))
+  );
+  const [authStateChange, setAuthStateChange] = useState(null);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    setUser(JSON.parse(getUser));
+    setAuthUser(JSON.parse(getUser || JSON.stringify({})));
+    fetch(`${dev.serverUrl}/api/users/${authUser?._id}`)
+      .then((res) => res.json())
+      .then((data) => data.success && setUser(data.user));
   }, [getUser]);
 
-  const authInfo = { user, setUser, authLoading, setAuthLoading };
+  // login
+  const login = async (userName, password) => {
+    const response = await fetch(`${dev.serverUrl}/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password }),
+    });
+    const loginUser = await response.json();
+    if (loginUser.success) {
+      setAuthUser({ _id: loginUser.user._id });
+      localStorage.setItem("user", JSON.stringify({ _id: loginUser.user._id }));
+    }
+    return loginUser;
+  };
+
+  // log out
+  const logout = () => {
+    localStorage.setItem("user", JSON.stringify({}));
+    setAuthUser("");
+  };
+
+  const authInfo = {
+    user,
+    authUser,
+    setAuthUser,
+    login,
+    logout,
+    authStateChange,
+    setAuthStateChange,
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

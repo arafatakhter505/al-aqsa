@@ -159,7 +159,9 @@ const updateUser = async (req, res) => {
       ? { ...update, password: hashedPassword }
       : update;
 
-    const user = await User.findByIdAndUpdate(id, updateUserInfo);
+    const user = await User.findByIdAndUpdate(id, updateUserInfo, {
+      password: 0,
+    });
 
     if (!user) {
       return res.status(404).json({ success: false, message: "No user found" });
@@ -168,6 +170,7 @@ const updateUser = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Update successfully",
+      user,
     });
   } catch (error) {
     return res.status(404).json({ success: false, message: "No user found" });

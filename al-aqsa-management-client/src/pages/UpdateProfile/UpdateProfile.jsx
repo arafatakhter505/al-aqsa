@@ -1,21 +1,21 @@
 import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { PageHeader, Spinner } from "../../components";
-import { RiArrowDropDownLine, RiLockPasswordLine } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import dev from "../../config";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../contextApi/UserContext";
 
-const UpdateUser = () => {
+const UpdateProfile = () => {
   const { id } = useParams();
   const [showPassword, setShowPassword] = useState(false);
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("Viewer");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const { setAuthStateChange } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // get user
@@ -27,22 +27,11 @@ const UpdateUser = () => {
           setFullName(data.user.fullName);
           setUserName(data.user.userName);
           setEmail(data.user.email);
-          setRole(data.user.role);
-          setStatus(data.user.isBlocked);
         });
     } catch (error) {
       toast.error(error.message);
     }
   }, []);
-
-  // set user info
-  // useEffect(() => {
-  //   setFullName(user?.fullName);
-  //   setUserName(user?.userName);
-  //   setEmail(user?.email);
-  //   setRole(user?.role);
-  //   setStatus(user?.isBlocked);
-  // }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,8 +44,6 @@ const UpdateUser = () => {
 
     const updateInfo = {
       fullName,
-      role,
-      isBlocked: status,
     };
 
     const updateUserInfo = password ? { ...updateInfo, password } : updateInfo;
@@ -76,7 +63,8 @@ const UpdateUser = () => {
         toast.success(updateUser.message);
         setSubmitLoading(false);
         setShowPassword(false);
-        navigate("/user");
+        setAuthStateChange(Math.random());
+        navigate(`/profile/${id}`);
       } else {
         setSubmitLoading(false);
         toast.error(updateUser.message);
@@ -90,10 +78,10 @@ const UpdateUser = () => {
   return (
     <div>
       <PageHeader
-        title="Update User"
-        btnText="All Users"
+        title="Update Profile"
+        btnText="Profile"
         icon="back"
-        path="/user"
+        path={`/profile/${id}`}
       />
       <div className="rounded-md border bg-white shadow p-6">
         <form onSubmit={handleSubmit}>
@@ -157,28 +145,6 @@ const UpdateUser = () => {
             </div>
 
             <div className="w-full">
-              <label className="mb-2.5 block text-black">User Role</label>
-              <div className="relative">
-                <select
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  className="relative z-20 w-full appearance-none rounded border bg-transparent py-4 px-6 outline-none transition focus:border-primary active:border-primary"
-                  required
-                >
-                  <option value="Viewer">Viewer</option>
-                  <option value="Editor">Editor</option>
-                  <option value="Admin">Admin</option>
-                </select>
-
-                <span className="absolute right-4 top-4 text-2xl text-gray-400">
-                  <RiArrowDropDownLine />
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-6 flex items-center justify-between md:flex-nowrap flex-wrap gap-6">
-            <div className="w-full">
               <label className="mb-2.5 block text-black">Password</label>
               <div className="relative">
                 <input
@@ -191,25 +157,6 @@ const UpdateUser = () => {
 
                 <span className="absolute right-4 top-4 text-2xl text-gray-400">
                   <RiLockPasswordLine />
-                </span>
-              </div>
-            </div>
-
-            <div className="w-full">
-              <label className="mb-2.5 block text-black">User Status</label>
-              <div className="relative">
-                <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  className="relative z-20 w-full appearance-none rounded border bg-transparent py-4 px-6 outline-none transition focus:border-primary active:border-primary"
-                  required
-                >
-                  <option value={false}>Active</option>
-                  <option value={true}>Block</option>
-                </select>
-
-                <span className="absolute right-4 top-4 text-2xl text-gray-400">
-                  <RiArrowDropDownLine />
                 </span>
               </div>
             </div>
@@ -241,4 +188,4 @@ const UpdateUser = () => {
   );
 };
 
-export default UpdateUser;
+export default UpdateProfile;

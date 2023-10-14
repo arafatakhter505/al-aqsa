@@ -1,9 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserImg } from "../../assets";
+import { AuthContext } from "../../contextApi/UserContext";
+import dev from "../../config";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [getUser, setGetUser] = useState({});
+  const { authUser, logout, authStateChange } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch(`${dev.serverUrl}/api/users/${authUser?._id}`)
+      .then((res) => res.json())
+      .then((data) => setGetUser(data.user));
+  }, [authStateChange]);
 
   // close on click outside
   useEffect(() => {
@@ -23,9 +33,9 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black">
-            Thomas Anree
+            {getUser?.fullName}
           </span>
-          <span className="block text-xs">UX Designer</span>
+          <span className="block text-xs">{getUser?.role}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full border-2 overflow-hidden">
@@ -60,7 +70,7 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-[1.825rem]">
           <li>
             <Link
-              to="/profile"
+              to={`/profile/${authUser?._id}`}
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
@@ -86,7 +96,7 @@ const DropdownUser = () => {
           </li>
           <li>
             <Link
-              to="/settings"
+              to={`/update-profile/${authUser?._id}`}
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
             >
@@ -111,7 +121,10 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button
+          onClick={logout}
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        >
           <svg
             className="fill-current"
             width="22"

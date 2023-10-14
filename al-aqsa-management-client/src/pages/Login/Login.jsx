@@ -1,11 +1,10 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../assets";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Spinner } from "../../components";
-import dev from "../../config";
 import { AuthContext } from "../../contextApi/UserContext";
 
 const Login = () => {
@@ -13,33 +12,23 @@ const Login = () => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
       setSubmitLoading(true);
-      const response = await fetch(`${dev.serverUrl}/api/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName, password }),
-      });
-      const loginUser = await response.json();
+
+      const loginUser = await login(userName, password);
       if (loginUser.success) {
         toast.success(loginUser.message);
         setSubmitLoading(false);
         setUserName("");
         setPassword("");
         setShowPassword(false);
-        setUser(loginUser.user);
-        localStorage.setItem("user", JSON.stringify(loginUser.user));
-        navigate(from, { replace: true });
+        navigate("/", { replace: true });
       } else {
         setSubmitLoading(false);
         toast.error(loginUser.message);
