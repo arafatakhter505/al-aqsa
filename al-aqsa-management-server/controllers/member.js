@@ -18,15 +18,15 @@ const addMember = async (req, res) => {
         message: "Contact is required",
       });
 
-    // create user
-    const member = { name, contact, position };
+    // create member
+    const member = { name, contact: Number(contact), position };
 
     const createMember = new Member(member);
     await createMember.save();
 
     return res.status(200).json({
       success: true,
-      message: "Successfully user created",
+      message: "Successfully member added",
     });
   } catch (error) {
     res.status(400).json({
@@ -45,12 +45,7 @@ const getAllMembers = async (req, res) => {
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = {
-      $or: [
-        { name: { $regex: searchRegExp } },
-        { contact: { $regex: searchRegExp } },
-      ],
-    };
+    const filter = { name: { $regex: searchRegExp } };
 
     const members = await Member.find(filter)
       .limit(limit)
@@ -122,7 +117,7 @@ const updateMember = async (req, res) => {
       member,
     });
   } catch (error) {
-    return res.status(404).json({ success: false, message: "No user found" });
+    return res.status(404).json({ success: false, message: "No member found" });
   }
 };
 

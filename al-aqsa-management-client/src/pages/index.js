@@ -7,6 +7,8 @@ import UpdateUser from "./UpdateUser/UpdateUser";
 import Profile from "./Profile/Profile";
 import UpdateProfile from "./UpdateProfile/UpdateProfile";
 import Error from "./Error/Error";
+import AddMember from "./AddMember/AddMember";
+import UpdateMember from "./UpdateMember/UpdateMember";
 
 export {
   Dashboard,
@@ -18,4 +20,6 @@ export {
   Profile,
   UpdateProfile,
   Error,
+  AddMember,
+  UpdateMember,
 };

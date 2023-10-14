@@ -35,15 +35,6 @@ const UpdateUser = () => {
     }
   }, []);
 
-  // set user info
-  // useEffect(() => {
-  //   setFullName(user?.fullName);
-  //   setUserName(user?.userName);
-  //   setEmail(user?.email);
-  //   setRole(user?.role);
-  //   setStatus(user?.isBlocked);
-  // }, [user]);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 

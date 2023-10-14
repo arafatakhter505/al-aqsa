@@ -1,0 +1,76 @@
+import { useContext } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsTrash } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { ModalContext } from "../../contextApi/ModalContextApi";
+import dev from "../../config";
+import toast from "react-hot-toast";
+
+const MemberTableRow = ({ member, index, refetch }) => {
+  const { setShowModal, setTitle, setBtn, setModalContent, setBtnAction } =
+    useContext(ModalContext);
+  const checkOddNumber = (index + 1) % 2 === 0 ? true : false;
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `${dev.serverUrl}/api/members/${member?._id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const deleteMember = await response.json();
+      if (deleteMember.success) {
+        setShowModal(false);
+        refetch();
+        toast.success(deleteMember.message);
+      } else {
+        toast.error(deleteMember.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const handleModal = () => {
+    setShowModal(true);
+    setTitle("Delete");
+    setBtn("Delete");
+    setModalContent("Are you sure you want to delete this member?");
+    setBtnAction(() => handleDelete);
+  };
+
+  return (
+    <tr
+      className={`border-b border-gray-200 hover:bg-gray-100 ${
+        checkOddNumber && "bg-gray-50"
+      }`}
+    >
+      <td className="py-3 px-6 text-left whitespace-nowrap">{member?.name}</td>
+      <td className="py-3 px-6 text-left">{member?.position}</td>
+      <td className="py-3 px-6 text-center">
+        <a href={`tel:0${member?.contact}`}>0{member?.contact}</a>
+      </td>
+      <td className="py-3 px-6 text-center">
+        <div className="flex item-center justify-end gap-2">
+          <Link
+            to={`/update-member/${member?._id}`}
+            className="flex items-center gap-1 bg-green-900 text-white px-3 py-2 rounded-md"
+          >
+            <AiOutlineEdit />
+            Edit
+          </Link>
+          <button
+            onClick={handleModal}
+            className="flex items-center gap-1 bg-red-700 text-white px-3 py-2 rounded-md"
+          >
+            <BsTrash />
+            Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+  );
+};
+
+export default MemberTableRow;

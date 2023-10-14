@@ -2,10 +2,12 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import routes from "./routes";
 import {
+  AddMember,
   AddUser,
   Error,
   Login,
   Profile,
+  UpdateMember,
   UpdateProfile,
   UpdateUser,
 } from "./pages";
@@ -30,6 +32,8 @@ const App = () => {
             </Route>
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/update-profile/:id" element={<UpdateProfile />} />
+            <Route path="/add-member" element={<AddMember />} />
+            <Route path="/update-member/:id" element={<UpdateMember />} />
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

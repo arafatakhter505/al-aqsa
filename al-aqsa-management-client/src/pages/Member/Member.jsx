@@ -1,11 +1,50 @@
+import { useEffect, useState } from "react";
 import { PageHeader } from "../../components";
+import dev from "../../config";
+import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 import MemberTable from "./MemberTable";
 
 const Member = () => {
+  const [getData, setGetData] = useState({});
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+
+  const { isLoading, refetch } = useQuery({
+    queryKey: ["members"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(
+          `${dev.serverUrl}/api/members?search=${search}&limit=${limit}&page=${page}`
+        );
+        const data = await res.json();
+        setGetData(data);
+        return data;
+      } catch (error) {
+        toast.error(error.message);
+      }
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [search, page, limit]);
+
   return (
     <div>
-      <PageHeader title="All Members" btnText="Add Member" />
-      <MemberTable />
+      <PageHeader
+        title="All Members"
+        btnText="Add Member"
+        path="/add-member"
+        icon="add"
+      />
+      <MemberTable
+        data={getData}
+        refetch={refetch}
+        isLoading={isLoading}
+        filter={{ search, setSearch, setPage, limit, setLimit }}
+      />
     </div>
   );
 };
