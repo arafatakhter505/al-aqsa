@@ -18,7 +18,7 @@ const Donation = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/donation?search=${search}&limit=${limit}&page=${page}`
+          `${dev.serverUrl}/api/donation?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`
         );
         const data = await res.json();
         setGetData(data);
@@ -31,7 +31,7 @@ const Donation = () => {
 
   useEffect(() => {
     refetch();
-  }, [search, page, limit]);
+  }, [search, page, limit, fromDate, toDate]);
 
   return (
     <div>

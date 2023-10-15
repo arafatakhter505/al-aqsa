@@ -1,6 +1,7 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Loading } from "../../components";
 import ExpenseTableRow from "./ExpenseTableRow";
+import { RxCross2 } from "react-icons/rx";
 
 const ExpenseTable = ({ data, filter, refetch, isLoading }) => {
   const { expenses, pagination } = data;

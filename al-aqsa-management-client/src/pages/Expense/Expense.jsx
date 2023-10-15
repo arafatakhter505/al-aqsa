@@ -18,7 +18,7 @@ const Expense = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/expenses?search=${search}&limit=${limit}&page=${page}`
+          `${dev.serverUrl}/api/expenses?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`
         );
         const data = await res.json();
         setGetData(data);
@@ -31,7 +31,7 @@ const Expense = () => {
 
   useEffect(() => {
     refetch();
-  }, [search, page, limit]);
+  }, [search, page, limit, fromDate, toDate]);
 
   return (
     <div>

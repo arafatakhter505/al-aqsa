@@ -54,15 +54,26 @@ const getAllExpenses = async (req, res) => {
     const search = req.query.search || "";
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
+    const fromDate = req.query.from;
+    const toDate = req.query.to;
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = {
-      $or: [
-        { about: { $regex: searchRegExp } },
-        { expensePerson: { $regex: searchRegExp } },
-      ],
-    };
+    const filter =
+      fromDate && toDate
+        ? {
+            $or: [
+              { about: { $regex: searchRegExp } },
+              { expensePerson: { $regex: searchRegExp } },
+            ],
+            date: { $gte: fromDate, $lte: toDate },
+          }
+        : {
+            $or: [
+              { about: { $regex: searchRegExp } },
+              { expensePerson: { $regex: searchRegExp } },
+            ],
+          };
 
     const expenses = await Expense.find(filter)
       .limit(limit)

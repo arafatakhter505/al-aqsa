@@ -48,15 +48,26 @@ const getAllDonation = async (req, res) => {
     const search = req.query.search || "";
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
+    const fromDate = req.query.from;
+    const toDate = req.query.to;
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = {
-      $or: [
-        { donerName: { $regex: searchRegExp } },
-        { comment: { $regex: searchRegExp } },
-      ],
-    };
+    const filter =
+      fromDate && toDate
+        ? {
+            $or: [
+              { donerName: { $regex: searchRegExp } },
+              { comment: { $regex: searchRegExp } },
+            ],
+            date: { $gte: fromDate, $lte: toDate },
+          }
+        : {
+            $or: [
+              { donerName: { $regex: searchRegExp } },
+              { comment: { $regex: searchRegExp } },
+            ],
+          };
 
     const donations = await Donation.find(filter)
       .limit(limit)
