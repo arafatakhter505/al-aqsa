@@ -14,7 +14,7 @@ const UpdateMember = () => {
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
 
-  // get user
+  // get member
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/members/${id}`)

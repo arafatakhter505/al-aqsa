@@ -11,7 +11,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 const AddDonation = () => {
   const [date, setDate] = useState("");
   const [amount, setAmount] = useState("");
-  const [donerName, setDonarName] = useState("");
+  const [donerName, setDonerName] = useState("");
   const [comment, setComment] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
   const [members, setMembers] = useState([]);
@@ -30,7 +30,9 @@ const AddDonation = () => {
 
   useEffect(() => {
     if (showMember) {
-      setDonarName(members[0].name);
+      setDonerName(members[0].name);
+    } else {
+      setDonerName("");
     }
   }, [showMember]);
 
@@ -60,10 +62,10 @@ const AddDonation = () => {
       if (createDonation.success) {
         toast.success(createDonation.message);
         setSubmitLoading(false);
-        setDate(null);
-        setAmount(null);
-        setDonarName(null);
-        setComment(null);
+        setDate("");
+        setAmount("");
+        setDonerName("");
+        setComment("");
         navigate("/donation");
       } else {
         setSubmitLoading(false);
@@ -128,7 +130,7 @@ const AddDonation = () => {
               <div className="relative">
                 <select
                   value={donerName}
-                  onChange={(e) => setDonarName(e.target.value)}
+                  onChange={(e) => setDonerName(e.target.value)}
                   className="relative z-20 w-full appearance-none rounded border bg-transparent py-4 px-6 outline-none transition focus:border-primary active:border-primary"
                   required
                 >
@@ -149,7 +151,7 @@ const AddDonation = () => {
                   type="text"
                   placeholder="Enter doner name"
                   value={donerName}
-                  onChange={(e) => setDonarName(e.target.value)}
+                  onChange={(e) => setDonerName(e.target.value)}
                   className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                   required
                 />
@@ -168,7 +170,7 @@ const AddDonation = () => {
                 onChange={() => setShowMember(!showMember)}
                 className="mx-2"
               />
-              <label htmlFor="show-member">The donor is a member</label>
+              <label htmlFor="show-member">The donor is a member?</label>
             </div>
           </div>
 

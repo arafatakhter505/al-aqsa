@@ -12,6 +12,9 @@ import UpdateMember from "./UpdateMember/UpdateMember";
 import Donation from "./Donation/Donation";
 import AddDonation from "./AddDonation/AddDonation";
 import UpdateDonation from "./UpdateDonation/UpdateDonation";
+import Expense from "./Expense/Expense";
+import AddExpense from "./AddExpense/AddExpense";
+import UpdateExpense from "./UpdateExpense/UpdateExpense";
 
 export {
   Dashboard,
@@ -28,4 +31,7 @@ export {
   Donation,
   AddDonation,
   UpdateDonation,
+  Expense,
+  AddExpense,
+  UpdateExpense,
 };

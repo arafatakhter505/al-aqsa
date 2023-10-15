@@ -3,12 +3,14 @@ import MainLayout from "./layouts/MainLayout";
 import routes from "./routes";
 import {
   AddDonation,
+  AddExpense,
   AddMember,
   AddUser,
   Error,
   Login,
   Profile,
   UpdateDonation,
+  UpdateExpense,
   UpdateMember,
   UpdateProfile,
   UpdateUser,
@@ -38,6 +40,8 @@ const App = () => {
             <Route path="/update-member/:id" element={<UpdateMember />} />
             <Route path="/add-donation" element={<AddDonation />} />
             <Route path="/update-donation/:id" element={<UpdateDonation />} />
+            <Route path="/add-expense" element={<AddExpense />} />
+            <Route path="/update-expense/:id" element={<UpdateExpense />} />
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

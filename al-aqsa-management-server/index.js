@@ -1,11 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const dev = require("./config");
 const { rateLimit } = require("express-rate-limit");
 const connectDb = require("./config/db");
 const userRouter = require("./routes/auth");
-const cors = require("cors");
 const memberRouter = require("./routes/member");
 const donationRouter = require("./routes/donation");
+const expenseRouter = require("./routes/expense");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/members", memberRouter);
 app.use("/api/donation", donationRouter);
+app.use("/api/expenses", expenseRouter);
 
 app.get("/", (req, res) => res.send("Al Aqsa Server Application"));
 
