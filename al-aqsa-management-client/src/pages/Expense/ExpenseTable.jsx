@@ -4,31 +4,91 @@ import ExpenseTableRow from "./ExpenseTableRow";
 
 const ExpenseTable = ({ data, filter, refetch, isLoading }) => {
   const { expenses, pagination } = data;
-  const { search, setSearch, setPage, limit, setLimit } = filter;
+  const {
+    search,
+    setSearch,
+    setPage,
+    fromDate,
+    setFromDate,
+    toDate,
+    setToDate,
+    limit,
+    setLimit,
+  } = filter;
 
   return (
     <div className="bg-white p-5 mb-6 rounded-md shadow">
-      <div className="flex items-center justify-between gap-6">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-2/3 outline-none border p-3 rounded-md"
-          placeholder="Search......."
-        />
-        <div className="flex items-center justify-end w-1/3">
-          <label className="text-lg hidden md:block">Rows Per Page</label>
-          <select
-            value={limit}
-            onChange={(e) => setLimit(e.target.value)}
-            className="p-3 ml-2 outline-none border w-[100px]"
-          >
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={30}>30</option>
-            <option value={40}>40</option>
-            <option value={50}>50</option>
-          </select>
+      <div className="flex items-center justify-between gap-5 md:flex-row flex-col">
+        <div className="lg:w-2/4 md:w-2/5 w-full flex items-center justify-between gap-5">
+          <div className="md:w-full w-2/3">
+            <label className="block">Search</label>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search......"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full outline-none border py-3 pl-4 pr-10 rounded-md"
+                required
+              />
+
+              <span className="absolute right-4 top-3 text-2xl text-gray-400">
+                {search && (
+                  <button onClick={() => setSearch("")}>
+                    <RxCross2 />
+                  </button>
+                )}
+              </span>
+            </div>
+          </div>
+          <div className="md:hidden w-1/3">
+            <label className="text-lg block">Show Item</label>
+            <select
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
+              className="p-3 outline-none border w-full"
+            >
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-3 md:w-3/5 w-full">
+          <div className="md:w-1/3 w-1/2">
+            <label className="block">From</label>
+            <input
+              type="date"
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
+              className="w-full outline-none border p-3 rounded-md"
+            />
+          </div>
+          <div className="md:w-1/3 w-1/2">
+            <label className="block">To</label>
+            <input
+              type="date"
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
+              className="w-[95%] outline-none border p-3 rounded-md"
+            />
+          </div>
+          <div className="md:w-1/3 hidden md:block">
+            <label className="text-lg block">Show Item</label>
+            <select
+              value={limit}
+              onChange={(e) => setLimit(e.target.value)}
+              className="p-3 outline-none border w-full"
+            >
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
         </div>
       </div>
       {isLoading ? (

@@ -1,6 +1,7 @@
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import UserTableRow from "./UserTableRow";
 import { Loading } from "../../components";
+import { RxCross2 } from "react-icons/rx";
 
 const UserTable = ({ data, filter, refetch, isLoading }) => {
   const { users, pagination } = data;
@@ -9,13 +10,24 @@ const UserTable = ({ data, filter, refetch, isLoading }) => {
   return (
     <div className="bg-white p-5 mb-6 rounded-md shadow">
       <div className="flex items-center justify-between gap-6">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-2/3 outline-none border p-3 rounded-md"
-          placeholder="Search......."
-        />
+        <div className="relative w-2/3">
+          <input
+            type="text"
+            placeholder="Search......"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full outline-none border py-3 pl-4 pr-10 rounded-md"
+            required
+          />
+
+          <span className="absolute right-4 top-3 text-2xl text-gray-400">
+            {search && (
+              <button onClick={() => setSearch("")}>
+                <RxCross2 />
+              </button>
+            )}
+          </span>
+        </div>
         <div className="flex items-center justify-end w-1/3">
           <label className="text-lg hidden md:block">Rows Per Page</label>
           <select

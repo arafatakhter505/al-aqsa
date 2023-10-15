@@ -8,6 +8,8 @@ import DonationTable from "./DonationTable";
 const Donation = () => {
   const [getData, setGetData] = useState({});
   const [search, setSearch] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
@@ -43,7 +45,17 @@ const Donation = () => {
         data={getData}
         refetch={refetch}
         isLoading={isLoading}
-        filter={{ search, setSearch, setPage, limit, setLimit }}
+        filter={{
+          search,
+          setSearch,
+          setPage,
+          fromDate,
+          setFromDate,
+          toDate,
+          setToDate,
+          limit,
+          setLimit,
+        }}
       />
     </div>
   );

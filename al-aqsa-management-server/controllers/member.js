@@ -45,7 +45,12 @@ const getAllMembers = async (req, res) => {
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = { name: { $regex: searchRegExp } };
+    const filter = {
+      $or: [
+        { name: { $regex: searchRegExp } },
+        { position: { $regex: searchRegExp } },
+      ],
+    };
 
     const members = await Member.find(filter)
       .limit(limit)
