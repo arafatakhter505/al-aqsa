@@ -7,7 +7,6 @@ const Dashboard = () => {
   const [expense, setExpense] = useState([]);
   const [donation, setDonation] = useState([]);
   const [members, setMembers] = useState([]);
-  const [remaining, setRemaining] = useState(0);
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/members`)
@@ -23,12 +22,12 @@ const Dashboard = () => {
       .then((data) => setDonation(data.donations));
   }, []);
 
-  const headerInfo = { expense, donation, members, remaining };
+  const headerInfo = { expense, donation, members };
 
   return (
     <div>
       <DashboardHeader headerInfo={headerInfo} />
-      <DashboardChart />
+      <DashboardChart expense={expense} donation={donation} />
     </div>
   );
 };

@@ -46,8 +46,8 @@ const addDonation = async (req, res) => {
 const getAllDonation = async (req, res) => {
   try {
     const search = req.query.search || "";
-    const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 10;
+    const page = Number(req.query.page);
+    const limit = Number(req.query.limit);
     const fromDate = req.query.from;
     const toDate = req.query.to;
 

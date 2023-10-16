@@ -5,7 +5,7 @@ import { TbMoneybag } from "react-icons/tb";
 import { FiUsers } from "react-icons/fi";
 
 const DashboardHeader = ({ headerInfo }) => {
-  const { expense, donation, members, remaining } = headerInfo;
+  const { expense, donation, members } = headerInfo;
 
   let totalDonation = 0;
   donation && donation.map((item) => (totalDonation += item.amount));

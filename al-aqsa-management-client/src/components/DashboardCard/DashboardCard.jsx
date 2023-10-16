@@ -2,8 +2,8 @@ const DashboardCard = ({ tkIcon, icon: IconComponent, amount, text }) => {
   return (
     <div className="p-5 bg-white shadow border rounded-md lg:flex items-center justify-between">
       <div className="lg:1/3">
-        <div className="text-4xl bg-[#1C2434] text-[#C6CCD7] w-14 h-14 flex items-center justify-center rounded-full mx-auto">
-          <IconComponent />
+        <div className="text-4xl bg-[#3C50E0] text-white lg:w-14 lg:h-14 w-16 h-16 flex items-center justify-center rounded-full mx-auto">
+          <IconComponent className="w-full" />
         </div>
       </div>
       <div className="lg:w-2/3 lg:mt-0 mt-4 lg:text-left text-center">

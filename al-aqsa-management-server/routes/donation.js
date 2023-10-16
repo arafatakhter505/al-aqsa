@@ -5,6 +5,7 @@ const {
   getDonationById,
   updateDonation,
   deleteDonation,
+  getAllDonationMonth,
 } = require("../controllers/donation");
 
 const donationRouter = express.Router();
