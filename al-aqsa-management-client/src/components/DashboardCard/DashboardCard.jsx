@@ -1,7 +1,7 @@
 import CountUp from "react-countup";
 import { BlackTkIcon } from "../../assets";
 
-const DashboardCard = ({ tkIcon, icon: IconComponent, amount, text }) => {
+const DashboardCard = ({ tkIcon, icon: IconComponent, value, text }) => {
   return (
     <div className="p-5 bg-white shadow border rounded-md lg:flex items-center justify-between">
       <div className="lg:1/3">
@@ -14,7 +14,7 @@ const DashboardCard = ({ tkIcon, icon: IconComponent, amount, text }) => {
           <span className={`${tkIcon || "hidden"} mr-1`}>
             <img src={BlackTkIcon} alt="tk" className="w-[15px]" />
           </span>
-          <CountUp end={amount} />
+          <CountUp end={value} />
         </h3>
         <p className="text-sm">Total {text}</p>
       </div>

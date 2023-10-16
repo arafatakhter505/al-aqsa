@@ -57,7 +57,7 @@ const getAllStudents = async (req, res) => {
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = { batch: { id: batchId }, name: { $regex: searchRegExp } };
+    const filter = { "batch.id": batchId, name: { $regex: searchRegExp } };
 
     const students = await Student.find(filter)
       .limit(limit)
@@ -65,7 +65,9 @@ const getAllStudents = async (req, res) => {
       .sort({ createdAt: -1 });
 
     const count = await Student.find(filter).countDocuments();
-    const totalStudent = await Student.find().countDocuments();
+    const totalStudent = await Student.find({
+      "batch.id": batchId,
+    }).countDocuments();
 
     if (students.length === 0) {
       return res.status(404).json({ success: false, message: "No found" });

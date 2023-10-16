@@ -20,25 +20,25 @@ const DashboardHeader = ({ headerInfo }) => {
       <DashboardCard
         tkIcon={true}
         icon={LiaDonateSolid}
-        amount={totalDonation}
+        value={totalDonation}
         text={"Donation"}
       />
       <DashboardCard
         tkIcon={true}
         icon={GiExpense}
-        amount={totalExpense}
+        value={totalExpense}
         text={"Expense"}
       />
       <DashboardCard
         tkIcon={true}
         icon={TbMoneybag}
-        amount={totalRemaining}
+        value={totalRemaining}
         text={"Remaining"}
       />
       <DashboardCard
         tkIcon={false}
         icon={FiUsers}
-        amount={members.length}
+        value={members ? members.length : 0}
         text={"Members"}
       />
     </div>

@@ -6,6 +6,7 @@ import {
   AddDonation,
   AddExpense,
   AddMember,
+  AddStudent,
   AddUser,
   BatchDetails,
   Error,
@@ -16,6 +17,7 @@ import {
   UpdateExpense,
   UpdateMember,
   UpdateProfile,
+  UpdateStudent,
   UpdateUser,
 } from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -65,6 +67,12 @@ const App = () => {
               <Route path="/update-batch/:id" element={<UpdateBatch />} />
             </Route>
             <Route path="/batch-details/:id" element={<BatchDetails />} />
+            <Route path="/add-student" element={<AccessRoute />}>
+              <Route path="/add-student/:id" element={<AddStudent />} />
+            </Route>
+            <Route path="/update-student" element={<AccessRoute />}>
+              <Route path="/update-student/:id" element={<UpdateStudent />} />
+            </Route>
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

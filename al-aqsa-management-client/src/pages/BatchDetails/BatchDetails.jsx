@@ -4,6 +4,7 @@ import dev from "../../config";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import BatchDetailsTable from "./BatchDetailsTable";
 
 const BatchDetails = () => {
   const { id } = useParams();
@@ -13,11 +14,11 @@ const BatchDetails = () => {
   const [limit, setLimit] = useState(10);
 
   const { isLoading, refetch } = useQuery({
-    queryKey: ["batch"],
+    queryKey: ["students"],
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/batch?search=${search}&limit=${limit}&page=${page}&batch=${id}`
+          `${dev.serverUrl}/api/students?search=${search}&limit=${limit}&page=${page}&batch=${id}`
         );
         const data = await res.json();
         setGetData(data);
@@ -34,10 +35,18 @@ const BatchDetails = () => {
   return (
     <div>
       <PageHeader
-        title="Total Student: 50"
+        title={`Total Student: ${
+          getData.totalStudent ? getData.totalStudent : 0
+        }`}
         btnText="Add Student"
-        path="/add-student"
+        path={`/add-student/${id}`}
         icon="add"
+      />
+      <BatchDetailsTable
+        data={getData}
+        refetch={refetch}
+        isLoading={isLoading}
+        filter={{ search, setSearch, setPage, limit, setLimit }}
       />
     </div>
   );
