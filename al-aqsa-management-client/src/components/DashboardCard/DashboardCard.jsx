@@ -1,3 +1,5 @@
+import CountUp from "react-countup";
+
 const DashboardCard = ({ tkIcon, icon: IconComponent, amount, text }) => {
   return (
     <div className="p-5 bg-white shadow border rounded-md lg:flex items-center justify-between">
@@ -8,8 +10,8 @@ const DashboardCard = ({ tkIcon, icon: IconComponent, amount, text }) => {
       </div>
       <div className="lg:w-2/3 lg:mt-0 mt-4 lg:text-left text-center">
         <h3 className="text-2xl font-semibold text-[#1C2434]">
-          <span className={`font-extrabold ${tkIcon || "hidden"}`}>৳</span>
-          {amount}
+          <span className={`font-extrabold ${tkIcon || "hidden"} mr-1`}>৳</span>
+          <CountUp end={amount} />
         </h3>
         <p className="text-sm">Total {text}</p>
       </div>

@@ -149,7 +149,7 @@ const MonthChart = ({ expense, donation }) => {
 
   return (
     <div className="bg-white shadow rounded-md border p-5 h-full">
-      <div className="flex items-center justify-between gap-5 px-5 pt-2">
+      <div className="flex items-center justify-between gap-5 px-5 pt-2 flex-wrap">
         <div className="flex items-center justify-start gap-5">
           <div className="flex items-center">
             <span className="w-5 h-5 border border-[#3C50E0] flex items-center justify-center rounded-full">

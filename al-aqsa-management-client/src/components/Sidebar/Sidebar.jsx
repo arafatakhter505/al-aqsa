@@ -67,14 +67,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <li
                     key={index}
                     onClick={() => setShowModal(false)}
-                    className={`p-2 rounded-md text-lg border-b border-gray-700 hover:bg-[#333A48] ${
+                    className={`rounded-md text-lg border-b border-gray-700 hover:bg-[#333A48] ${
                       pathname === path && "bg-[#333A48]"
                     }`}
                   >
                     <NavLink
                       to={path}
                       onClick={() => setSidebarOpen(!sidebarOpen)}
-                      className="w-full flex items-center gap-2"
+                      className="w-full p-2 flex items-center gap-2"
                     >
                       <Icon />
                       {title}
