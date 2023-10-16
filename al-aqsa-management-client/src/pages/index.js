@@ -15,6 +15,9 @@ import UpdateDonation from "./UpdateDonation/UpdateDonation";
 import Expense from "./Expense/Expense";
 import AddExpense from "./AddExpense/AddExpense";
 import UpdateExpense from "./UpdateExpense/UpdateExpense";
+import Batch from "./Batch/Batch";
+import AddBatch from "./AddBatch/AddBatch";
+import UpdateBatch from "./UpdateBatch/UpdateBatch";
 
 export {
   Dashboard,
@@ -34,4 +37,7 @@ export {
   Expense,
   AddExpense,
   UpdateExpense,
+  Batch,
+  AddBatch,
+  UpdateBatch,
 };

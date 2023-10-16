@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddMember = () => {
   const [name, setName] = useState("");
-  const [contact, setContact] = useState(null);
+  const [contact, setContact] = useState("");
   const [position, setPosition] = useState("Member");
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();

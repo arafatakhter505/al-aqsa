@@ -18,7 +18,7 @@ const addBatch = async (req, res) => {
         message: "Start date is required",
       });
 
-    if (!trainer.trim())
+    if (!trainer)
       return res.status(400).json({
         success: false,
         message: "Trainer information is required",

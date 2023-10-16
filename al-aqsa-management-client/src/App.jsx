@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import routes from "./routes";
 import {
+  AddBatch,
   AddDonation,
   AddExpense,
   AddMember,
@@ -9,6 +10,7 @@ import {
   Error,
   Login,
   Profile,
+  UpdateBatch,
   UpdateDonation,
   UpdateExpense,
   UpdateMember,
@@ -54,6 +56,12 @@ const App = () => {
             </Route>
             <Route path="/update-expense" element={<AccessRoute />}>
               <Route path="/update-expense/:id" element={<UpdateExpense />} />
+            </Route>
+            <Route path="/add-batch" element={<AccessRoute />}>
+              <Route path="/add-batch" element={<AddBatch />} />
+            </Route>
+            <Route path="/update-batch" element={<AccessRoute />}>
+              <Route path="/update-batch/:id" element={<UpdateBatch />} />
             </Route>
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
