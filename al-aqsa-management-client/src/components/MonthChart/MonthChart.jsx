@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const MonthChart = ({ expense, donation }) => {
   const donationMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const expenseMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  const [year, setYear] = useState(new Date().getFullYear());
+  const year = new Date().getFullYear();
   let maxAmount = 0;
 
   donation &&
@@ -150,7 +149,7 @@ const MonthChart = ({ expense, donation }) => {
 
   return (
     <div className="bg-white shadow rounded-md border p-5 h-full">
-      <div className="flex items-center justify-between gap-5 pl-5 pt-2">
+      <div className="flex items-center justify-between gap-5 px-5 pt-2">
         <div className="flex items-center justify-start gap-5">
           <div className="flex items-center">
             <span className="w-5 h-5 border border-[#3C50E0] flex items-center justify-center rounded-full">
@@ -171,14 +170,7 @@ const MonthChart = ({ expense, donation }) => {
         </div>
         <div>
           <span className="font-semibold text-xl flex items-center gap-2">
-            <label>Year</label>
-            <input
-              type="number"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              min="2021"
-              className="w-[70px] outline-none"
-            />
+            Year: {year}
           </span>
         </div>
       </div>
