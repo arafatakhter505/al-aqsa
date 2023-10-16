@@ -2,10 +2,17 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Loading } from "../../components";
 import MemberTableRow from "./MemberTableRow";
 import { RxCross2 } from "react-icons/rx";
+import { useContext } from "react";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const MemberTable = ({ data, filter, refetch, isLoading }) => {
+  const { user } = useContext(AuthContext);
   const { members, pagination } = data;
   const { search, setSearch, setPage, limit, setLimit } = filter;
+  const access =
+    user.role === "Super Admin" ||
+    user.role === "Admin" ||
+    user.role === "Editor";
 
   return (
     <div className="bg-white p-5 mb-6 rounded-md shadow">
@@ -54,7 +61,7 @@ const MemberTable = ({ data, filter, refetch, isLoading }) => {
                   <th className="py-3 px-6 text-left">Name</th>
                   <th className="py-3 px-6 text-left">Position</th>
                   <th className="py-3 px-6 text-center">Contact</th>
-                  <th className="py-3 px-6 text-center">Actions</th>
+                  {access && <th className="py-3 px-6 text-center">Actions</th>}
                 </tr>
               </thead>
               <tbody className="text-gray-600">

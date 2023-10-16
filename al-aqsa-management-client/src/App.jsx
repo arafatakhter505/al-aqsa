@@ -19,6 +19,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminRoute from "./routes/AdminRoute";
 import { useContext } from "react";
 import { AuthContext } from "./contextApi/UserContext";
+import AccessRoute from "./routes/AccessRoute";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -36,12 +37,24 @@ const App = () => {
             </Route>
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/update-profile/:id" element={<UpdateProfile />} />
-            <Route path="/add-member" element={<AddMember />} />
-            <Route path="/update-member/:id" element={<UpdateMember />} />
-            <Route path="/add-donation" element={<AddDonation />} />
-            <Route path="/update-donation/:id" element={<UpdateDonation />} />
-            <Route path="/add-expense" element={<AddExpense />} />
-            <Route path="/update-expense/:id" element={<UpdateExpense />} />
+            <Route path="/add-member" element={<AccessRoute />}>
+              <Route path="/add-member" element={<AddMember />} />
+            </Route>
+            <Route path="/update-member" element={<AccessRoute />}>
+              <Route path="/update-member/:id" element={<UpdateMember />} />
+            </Route>
+            <Route path="/add-donation" element={<AccessRoute />}>
+              <Route path="/add-donation" element={<AddDonation />} />
+            </Route>
+            <Route path="/update-donation" element={<AccessRoute />}>
+              <Route path="/update-donation/:id" element={<UpdateDonation />} />
+            </Route>
+            <Route path="/add-expense" element={<AccessRoute />}>
+              <Route path="/add-expense" element={<AddExpense />} />
+            </Route>
+            <Route path="/update-expense" element={<AccessRoute />}>
+              <Route path="/update-expense/:id" element={<UpdateExpense />} />
+            </Route>
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

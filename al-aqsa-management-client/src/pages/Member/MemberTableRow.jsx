@@ -5,11 +5,18 @@ import { Link } from "react-router-dom";
 import { ModalContext } from "../../contextApi/ModalContextApi";
 import dev from "../../config";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const MemberTableRow = ({ member, index, refetch }) => {
+  const { user } = useContext(AuthContext);
   const { setShowModal, setTitle, setBtn, setModalContent, setBtnAction } =
     useContext(ModalContext);
   const checkOddNumber = (index + 1) % 2 === 0 ? true : false;
+
+  const access =
+    user.role === "Super Admin" ||
+    user.role === "Admin" ||
+    user.role === "Editor";
 
   const handleDelete = async () => {
     try {
@@ -51,16 +58,18 @@ const MemberTableRow = ({ member, index, refetch }) => {
       <td className="py-3 px-6 text-center">
         <a href={`tel:0${member?.contact}`}>0{member?.contact}</a>
       </td>
-      <td className="py-3 px-6 text-center">
-        <div className="flex item-center justify-center text-xl gap-2">
-          <Link to={`/update-member/${member?._id}`}>
-            <AiOutlineEdit />
-          </Link>
-          <button onClick={handleModal}>
-            <BsTrash />
-          </button>
-        </div>
-      </td>
+      {access && (
+        <td className="py-3 px-6 text-center">
+          <div className="flex item-center justify-center text-xl gap-2">
+            <Link to={`/update-member/${member?._id}`}>
+              <AiOutlineEdit />
+            </Link>
+            <button onClick={handleModal}>
+              <BsTrash />
+            </button>
+          </div>
+        </td>
+      )}
     </tr>
   );
 };

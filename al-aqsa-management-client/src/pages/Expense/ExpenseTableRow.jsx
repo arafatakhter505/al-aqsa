@@ -5,11 +5,18 @@ import { Link } from "react-router-dom";
 import { ModalContext } from "../../contextApi/ModalContextApi";
 import dev from "../../config";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const ExpenseTableRow = ({ expense, index, refetch }) => {
+  const { user } = useContext(AuthContext);
   const { setShowModal, setTitle, setBtn, setModalContent, setBtnAction } =
     useContext(ModalContext);
   const checkOddNumber = (index + 1) % 2 === 0 ? true : false;
+
+  const access =
+    user.role === "Super Admin" ||
+    user.role === "Admin" ||
+    user.role === "Editor";
 
   const handleDelete = async () => {
     try {
@@ -55,16 +62,18 @@ const ExpenseTableRow = ({ expense, index, refetch }) => {
       <td className="py-3 px-6 text-center">
         {new Date(expense?.updatedAt).toDateString()}
       </td>
-      <td className="py-3 px-6 text-center">
-        <div className="flex item-center justify-center text-xl gap-2">
-          <Link to={`/update-expense/${expense?._id}`}>
-            <AiOutlineEdit />
-          </Link>
-          <button onClick={handleModal}>
-            <BsTrash />
-          </button>
-        </div>
-      </td>
+      {access && (
+        <td className="py-3 px-6 text-center">
+          <div className="flex item-center justify-center text-xl gap-2">
+            <Link to={`/update-expense/${expense?._id}`}>
+              <AiOutlineEdit />
+            </Link>
+            <button onClick={handleModal}>
+              <BsTrash />
+            </button>
+          </div>
+        </td>
+      )}
     </tr>
   );
 };

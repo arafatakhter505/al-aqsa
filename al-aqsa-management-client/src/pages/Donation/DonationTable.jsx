@@ -2,8 +2,11 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { Loading } from "../../components";
 import DonationTableRow from "./DonationTableRow";
 import { RxCross2 } from "react-icons/rx";
+import { useContext } from "react";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const DonationTable = ({ data, filter, refetch, isLoading }) => {
+  const { user } = useContext(AuthContext);
   const { donations, pagination } = data;
   const {
     search,
@@ -16,6 +19,11 @@ const DonationTable = ({ data, filter, refetch, isLoading }) => {
     limit,
     setLimit,
   } = filter;
+
+  const access =
+    user.role === "Super Admin" ||
+    user.role === "Admin" ||
+    user.role === "Editor";
 
   return (
     <div className="bg-white p-5 mb-6 rounded-md shadow">
@@ -105,7 +113,7 @@ const DonationTable = ({ data, filter, refetch, isLoading }) => {
                   <th className="py-3 px-6 text-center">Amount</th>
                   <th className="py-3 px-6 text-center">Comment</th>
                   <th className="py-3 px-6 text-center">Last Update</th>
-                  <th className="py-3 px-6 text-center">Actions</th>
+                  {access && <th className="py-3 px-6 text-center">Actions</th>}
                 </tr>
               </thead>
               <tbody className="text-gray-600">
