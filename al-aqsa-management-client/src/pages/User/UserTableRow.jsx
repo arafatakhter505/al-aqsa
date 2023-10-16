@@ -64,20 +64,12 @@ const UserTableRow = ({ user, index, refetch }) => {
         {user?.role === "Super Admin" ? (
           "No Action"
         ) : (
-          <div className="flex item-center justify-end gap-2">
-            <Link
-              to={`/update-user/${user?._id}`}
-              className="flex items-center gap-1 bg-green-900 text-white px-3 py-2 rounded-md"
-            >
+          <div className="flex item-center justify-center text-xl gap-2">
+            <Link to={`/update-user/${user?._id}`}>
               <AiOutlineEdit />
-              Edit
             </Link>
-            <button
-              onClick={handleModal}
-              className="flex items-center gap-1 bg-red-700 text-white px-3 py-2 rounded-md"
-            >
+            <button onClick={handleModal}>
               <BsTrash />
-              Delete
             </button>
           </div>
         )}

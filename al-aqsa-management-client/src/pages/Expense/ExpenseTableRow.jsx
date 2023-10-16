@@ -56,20 +56,12 @@ const ExpenseTableRow = ({ expense, index, refetch }) => {
         {new Date(expense?.updatedAt).toDateString()}
       </td>
       <td className="py-3 px-6 text-center">
-        <div className="flex item-center justify-end gap-2">
-          <Link
-            to={`/update-expense/${expense?._id}`}
-            className="flex items-center gap-1 bg-green-900 text-white px-3 py-2 rounded-md"
-          >
+        <div className="flex item-center justify-center text-xl gap-2">
+          <Link to={`/update-expense/${expense?._id}`}>
             <AiOutlineEdit />
-            Edit
           </Link>
-          <button
-            onClick={handleModal}
-            className="flex items-center gap-1 bg-red-700 text-white px-3 py-2 rounded-md"
-          >
+          <button onClick={handleModal}>
             <BsTrash />
-            Delete
           </button>
         </div>
       </td>
