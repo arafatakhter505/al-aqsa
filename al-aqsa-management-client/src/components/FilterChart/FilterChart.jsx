@@ -3,6 +3,7 @@ import dev from "../../config";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import CountUp from "react-countup";
+import { WhiteTkIcon } from "../../assets";
 
 const FilterChart = () => {
   const [donation, setDonation] = useState([]);
@@ -71,15 +72,19 @@ const FilterChart = () => {
       <div className="lg:block md:flex items-center justify-between gap-5">
         <div className="bg-[#3C50E0] text-white w-full p-5 mt-5 rounded-md shadow">
           <h3 className="text-2xl font-semibold mb-1">Total Donation</h3>
-          <h3 className="text-4xl font-semibold">
-            <span className="font-extrabold mr-1">৳</span>
+          <h3 className="text-4xl font-semibold flex items-center">
+            <span className="mr-1">
+              <img src={WhiteTkIcon} alt="tk" className="w-[22px]" />
+            </span>
             <CountUp end={totalDonation} />
           </h3>
         </div>
         <div className="bg-[#0FADCF] text-white w-full p-5 mt-5 rounded-md shadow">
           <h3 className="text-2xl font-semibold mb-1">Total Expense</h3>
-          <h3 className="text-4xl font-semibold">
-            <span className="font-extrabold mr-1">৳</span>
+          <h3 className="text-4xl font-semibold flex items-center">
+            <span className="mr-1">
+              <img src={WhiteTkIcon} alt="tk" className="w-[22px]" />
+            </span>
             <CountUp end={totalExpense} />
           </h3>
         </div>
