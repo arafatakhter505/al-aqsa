@@ -18,6 +18,7 @@ import UpdateExpense from "./UpdateExpense/UpdateExpense";
 import Batch from "./Batch/Batch";
 import AddBatch from "./AddBatch/AddBatch";
 import UpdateBatch from "./UpdateBatch/UpdateBatch";
+import BatchDetails from "./BatchDetails/BatchDetails";
 
 export {
   Dashboard,
@@ -40,4 +41,5 @@ export {
   Batch,
   AddBatch,
   UpdateBatch,
+  BatchDetails,
 };

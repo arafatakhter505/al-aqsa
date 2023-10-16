@@ -7,6 +7,7 @@ import {
   AddExpense,
   AddMember,
   AddUser,
+  BatchDetails,
   Error,
   Login,
   Profile,
@@ -63,6 +64,7 @@ const App = () => {
             <Route path="/update-batch" element={<AccessRoute />}>
               <Route path="/update-batch/:id" element={<UpdateBatch />} />
             </Route>
+            <Route path="/batch-details/:id" element={<BatchDetails />} />
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { ModalContext } from "../../contextApi/ModalContextApi";
@@ -50,7 +50,15 @@ const BatchTableRow = ({ batch, index, refetch }) => {
         checkOddNumber && "bg-gray-50"
       }`}
     >
-      <td className="py-3 px-6 text-left whitespace-nowrap">{batch?.name}</td>
+      <td className="py-3 px-6 text-left flex items-center whitespace-nowrap">
+        {batch?.name}
+        <Link
+          to={`/batch-details/${batch?._id}`}
+          className="bg-[#1C2434] text-[#C6CCD7] px-1 rounded-md ml-2"
+        >
+          Details
+        </Link>
+      </td>
       <td className="py-3 px-6 text-left">
         {new Date(batch?.startDate).toDateString()}
       </td>
