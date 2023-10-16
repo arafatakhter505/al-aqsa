@@ -4,7 +4,6 @@ import { LiaChalkboardTeacherSolid, LiaDonateSolid } from "react-icons/lia";
 import { GiExpense } from "react-icons/gi";
 import { BsCalendar2Event } from "react-icons/bs";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import AdminRoute from "./AdminRoute";
 
 const routes = [
   {
@@ -12,42 +11,42 @@ const routes = [
     title: "Dashboard",
     component: Dashboard,
     icon: LuLayoutDashboard,
-    show: ["Super Admin", "Admin", "Viewer", "Editor"],
+    show: ["Super Admin", "Admin", "Viewer", "Trainer", "Editor"],
   },
   {
     path: "/member",
     title: "Member",
     component: Member,
     icon: LuUsers,
-    show: ["Super Admin", "Admin", "Viewer", "Editor"],
+    show: ["Super Admin", "Admin", "Viewer", "Trainer", "Editor"],
   },
   {
     path: "/donation",
     title: "Donation",
     component: Donation,
     icon: LiaDonateSolid,
-    show: ["Super Admin", "Admin", "Viewer", "Editor"],
+    show: ["Super Admin", "Admin", "Viewer", "Trainer", "Editor"],
   },
   {
     path: "/expense",
     title: "Expense",
     component: Expense,
     icon: GiExpense,
-    show: ["Super Admin", "Admin", "Viewer", "Editor"],
+    show: ["Super Admin", "Admin", "Viewer", "Trainer", "Editor"],
   },
   {
     path: "/teaching-quran",
     title: "Teaching Quran",
     component: Member,
     icon: LiaChalkboardTeacherSolid,
-    show: ["Super Admin", "Admin", "Viewer", "Editor"],
+    show: ["Super Admin", "Admin", "Viewer", "Trainer", "Editor"],
   },
   {
     path: "/event",
     title: "Event",
     component: Member,
     icon: BsCalendar2Event,
-    show: ["Super Admin", "Admin", "Viewer", "Editor"],
+    show: ["Super Admin", "Admin", "Viewer", "Trainer", "Editor"],
   },
   {
     path: "/user",

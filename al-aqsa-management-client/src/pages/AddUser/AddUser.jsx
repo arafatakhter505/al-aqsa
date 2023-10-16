@@ -161,6 +161,7 @@ const AddUser = () => {
                   required
                 >
                   <option value="Viewer">Viewer</option>
+                  <option value="Trainer">Trainer</option>
                   <option value="Editor">Editor</option>
                   <option value="Admin">Admin</option>
                 </select>
