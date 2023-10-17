@@ -9,6 +9,7 @@ const donationRouter = require("./routes/donation");
 const expenseRouter = require("./routes/expense");
 const batchRouter = require("./routes/batch");
 const studentRouter = require("./routes/student");
+const attendanceRouter = require("./routes/attendance");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api/donation", donationRouter);
 app.use("/api/expenses", expenseRouter);
 app.use("/api/batch", batchRouter);
 app.use("/api/students", studentRouter);
+app.use("/api/attendances", attendanceRouter);
 
 app.get("/", (req, res) => res.send("Al Aqsa Server Application"));
 

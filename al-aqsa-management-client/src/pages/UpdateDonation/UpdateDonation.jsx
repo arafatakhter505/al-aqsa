@@ -18,6 +18,9 @@ const UpdateDonation = () => {
   const [members, setMembers] = useState([]);
   const [showMember, setShowMember] = useState(false);
   const navigate = useNavigate();
+  const year = new Date(date).getFullYear();
+  const month = new Date(date).getMonth() + 1;
+  const day = new Date(date).getDate();
 
   useEffect(() => {
     try {
@@ -101,7 +104,7 @@ const UpdateDonation = () => {
                 <input
                   type="date"
                   placeholder="Enter date"
-                  value={date}
+                  value={`${year}-${month}-${day > 9 ? day : "0" + day}`}
                   onChange={(e) => setDate(e.target.value)}
                   className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                 />
