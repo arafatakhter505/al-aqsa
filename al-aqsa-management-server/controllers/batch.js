@@ -1,4 +1,6 @@
+const Attendance = require("../models/attendance");
 const Batch = require("../models/batch");
+const Student = require("../models/student");
 
 // add batch controller
 const addBatch = async (req, res) => {
@@ -137,6 +139,9 @@ const deleteBatch = async (req, res) => {
         .status(404)
         .json({ success: false, message: "No batch found" });
     }
+
+    await Student.deleteMany({ "batch.id": id });
+    await Attendance.deleteMany({ "batch.id": id });
 
     return res.status(200).json({
       success: true,

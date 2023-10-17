@@ -4,12 +4,13 @@ import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../../contextApi/UserContext";
 
-const PageHeader = ({ title, btnText, path, icon }) => {
+const PageHeader = ({ title, btnText, path, icon, custom }) => {
   const { user } = useContext(AuthContext);
   const access =
     user.role === "Super Admin" ||
     user.role === "Admin" ||
-    user.role === "Editor";
+    user.role === "Editor" ||
+    custom;
 
   return (
     <div className="bg-white p-5 mb-6 rounded-md shadow flex items-center justify-between">

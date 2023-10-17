@@ -24,7 +24,8 @@ const AttendanceTableRow = ({ attendance, index, refetch }) => {
   const access =
     user.role === "Super Admin" ||
     user.role === "Admin" ||
-    user.role === "Editor";
+    user.role === "Editor" ||
+    user.role === "Trainer";
 
   const handleDelete = async () => {
     try {

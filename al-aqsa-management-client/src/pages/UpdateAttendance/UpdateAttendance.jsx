@@ -1,11 +1,13 @@
 import { PageHeader } from "../../components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import dev from "../../config";
 import { useParams } from "react-router-dom";
 import UpdateAttendanceTable from "./UpdateAttendanceTable";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const UpdateAttendance = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [attendance, setAttendance] = useState({});
   const [date, setDate] = useState("");
@@ -30,6 +32,7 @@ const UpdateAttendance = () => {
         btnText="All Attendance"
         icon="back"
         path="/attendance"
+        custom={user.role === "Trainer"}
       />
       <UpdateAttendanceTable
         attendance={attendance}

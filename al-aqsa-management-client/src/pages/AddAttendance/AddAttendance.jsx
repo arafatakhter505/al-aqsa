@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PageHeader } from "../../components";
 import AddAttendanceTable from "./AddAttendanceTable";
 import dev from "../../config";
 import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const AddAttendance = () => {
+  const { user } = useContext(AuthContext);
   const [allBatch, setAllBatch] = useState([]);
   const [batch, setBatch] = useState("");
 
@@ -44,6 +46,7 @@ const AddAttendance = () => {
         btnText="All Attendance"
         icon="back"
         path="/attendance"
+        custom={user.role === "Trainer"}
       />
       <AddAttendanceTable
         allBatch={allBatch}

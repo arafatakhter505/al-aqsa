@@ -13,7 +13,8 @@ const AttendanceTable = ({ data, filter, refetch, isLoading }) => {
   const access =
     user.role === "Super Admin" ||
     user.role === "Admin" ||
-    user.role === "Editor";
+    user.role === "Editor" ||
+    user.role === "Trainer";
 
   return (
     <div className="bg-white p-5 mb-6 rounded-md shadow">

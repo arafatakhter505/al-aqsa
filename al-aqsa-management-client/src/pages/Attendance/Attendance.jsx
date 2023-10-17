@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import dev from "../../config";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { PageHeader } from "../../components";
 import AttendanceTable from "./AttendanceTable";
+import { AuthContext } from "../../contextApi/UserContext";
 
 const Attendance = () => {
+  const { user } = useContext(AuthContext);
   const [getData, setGetData] = useState({});
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -43,6 +45,7 @@ const Attendance = () => {
         btnText="Add Attendance"
         path="/add-attendance"
         icon="add"
+        custom={user.role === "Trainer"}
       />
       <AttendanceTable
         data={getData}

@@ -28,6 +28,7 @@ import AdminRoute from "./routes/AdminRoute";
 import { useContext } from "react";
 import { AuthContext } from "./contextApi/UserContext";
 import AccessRoute from "./routes/AccessRoute";
+import TrainerAccessRoute from "./routes/TrainerAccessRoute";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -76,10 +77,10 @@ const App = () => {
             <Route path="/update-student" element={<AccessRoute />}>
               <Route path="/update-student/:id" element={<UpdateStudent />} />
             </Route>
-            <Route path="/add-attendance" element={<AccessRoute />}>
+            <Route path="/add-attendance" element={<TrainerAccessRoute />}>
               <Route path="/add-attendance" element={<AddAttendance />} />
             </Route>
-            <Route path="/update-attendance" element={<AccessRoute />}>
+            <Route path="/update-attendance" element={<TrainerAccessRoute />}>
               <Route
                 path="/update-attendance/:id"
                 element={<UpdateAttendance />}
