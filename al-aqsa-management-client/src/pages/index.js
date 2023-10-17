@@ -21,6 +21,8 @@ import UpdateBatch from "./UpdateBatch/UpdateBatch";
 import BatchDetails from "./BatchDetails/BatchDetails";
 import AddStudent from "./AddStudent/AddStudent";
 import UpdateStudent from "./UpdateStudent/UpdateStudent";
+import Attendance from "./Attendance/Attendance";
+import AddAttendance from "./AddAttendance/AddAttendance";
 
 export {
   Dashboard,
@@ -46,4 +48,6 @@ export {
   BatchDetails,
   AddStudent,
   UpdateStudent,
+  Attendance,
+  AddAttendance,
 };

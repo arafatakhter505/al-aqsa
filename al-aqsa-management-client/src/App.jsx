@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import routes from "./routes";
 import {
+  AddAttendance,
   AddBatch,
   AddDonation,
   AddExpense,
@@ -72,6 +73,9 @@ const App = () => {
             </Route>
             <Route path="/update-student" element={<AccessRoute />}>
               <Route path="/update-student/:id" element={<UpdateStudent />} />
+            </Route>
+            <Route path="/add-attendance" element={<AccessRoute />}>
+              <Route path="/add-attendance" element={<AddAttendance />} />
             </Route>
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
