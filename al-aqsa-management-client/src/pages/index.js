@@ -23,6 +23,8 @@ import AddStudent from "./AddStudent/AddStudent";
 import UpdateStudent from "./UpdateStudent/UpdateStudent";
 import Attendance from "./Attendance/Attendance";
 import AddAttendance from "./AddAttendance/AddAttendance";
+import UpdateAttendance from "./UpdateAttendance/UpdateAttendance";
+import AttendanceDetails from "./AttendanceDetails/AttendanceDetails";
 
 export {
   Dashboard,
@@ -50,4 +52,6 @@ export {
   UpdateStudent,
   Attendance,
   AddAttendance,
+  UpdateAttendance,
+  AttendanceDetails,
 };

@@ -33,6 +33,10 @@ const Donation = () => {
     refetch();
   }, [search, page, limit, fromDate, toDate]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [search, limit, fromDate, toDate]);
+
   return (
     <div>
       <PageHeader

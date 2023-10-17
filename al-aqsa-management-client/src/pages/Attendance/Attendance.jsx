@@ -32,6 +32,10 @@ const Attendance = () => {
     refetch();
   }, [search, page, limit, date]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [search, date, limit]);
+
   return (
     <div>
       <PageHeader

@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import BatchDetailsTable from "./BatchDetailsTable";
+import TrainerInfo from "./TrainerInfo";
 
 const BatchDetails = () => {
   const { id } = useParams();
@@ -32,6 +33,11 @@ const BatchDetails = () => {
   useEffect(() => {
     refetch();
   }, [search, page, limit]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, limit]);
+
   return (
     <div>
       <PageHeader
@@ -48,6 +54,7 @@ const BatchDetails = () => {
         isLoading={isLoading}
         filter={{ search, setSearch, setPage, limit, setLimit }}
       />
+      <TrainerInfo id={id} />
     </div>
   );
 };

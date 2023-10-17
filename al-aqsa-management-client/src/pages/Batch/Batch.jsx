@@ -31,6 +31,10 @@ const Batch = () => {
     refetch();
   }, [search, page, limit]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [search, limit]);
+
   return (
     <div>
       <PageHeader

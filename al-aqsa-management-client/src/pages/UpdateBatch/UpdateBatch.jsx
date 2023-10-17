@@ -17,6 +17,12 @@ const UpdateBatch = () => {
   const [trainerAddress, setTrainerAddress] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
   const navigate = useNavigate();
+  const startYear = new Date(startDate).getFullYear();
+  const startMonth = new Date(startDate).getMonth() + 1;
+  const startDay = new Date(startDate).getDate();
+  const endYear = new Date(endDate).getFullYear();
+  const endMonth = new Date(endDate).getMonth() + 1;
+  const endDay = new Date(endDate).getDate();
 
   // get batch
   useEffect(() => {
@@ -129,7 +135,9 @@ const UpdateBatch = () => {
                 <input
                   type="date"
                   placeholder="Enter start date"
-                  value={startDate}
+                  value={`${startYear}-${
+                    startMonth > 9 ? startMonth : "0" + startMonth
+                  }-${startDay > 9 ? startDay : "0" + startDay}`}
                   onChange={(e) => setStartDate(e.target.value)}
                   className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                 />
@@ -145,7 +153,9 @@ const UpdateBatch = () => {
                 <input
                   type="date"
                   placeholder="Enter end date"
-                  value={endDate}
+                  value={`${endYear}-${
+                    endMonth > 9 ? endMonth : "0" + endMonth
+                  }-${endDay > 9 ? endDay : "0" + endDay}`}
                   onChange={(e) => setEndDate(e.target.value)}
                   className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                 />

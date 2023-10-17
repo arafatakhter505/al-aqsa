@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { ModalContext } from "../../contextApi/ModalContextApi";
@@ -55,12 +55,6 @@ const BatchDetailsTableRow = ({ student, index, refetch }) => {
     >
       <td className="py-3 px-6 text-left flex items-center whitespace-nowrap">
         {student?.name}
-        <Link
-          to={`/student-attendance/${student?._id}`}
-          className="bg-[#1C2434] text-[#C6CCD7] px-1 rounded-md ml-2"
-        >
-          Attendance
-        </Link>
       </td>
       <td className="py-3 px-6 text-left">
         <a href={`tel:0${student?.contact}`}>0{student?.contact}</a>

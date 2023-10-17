@@ -31,9 +31,7 @@ const UpdateMember = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const contactNumber = Number(contact);
-
     if (!contactNumber) {
       return toast.error("Enter valid contact number");
     }

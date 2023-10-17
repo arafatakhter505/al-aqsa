@@ -52,7 +52,9 @@ const getAllAttendances = async (req, res) => {
 
     const searchRegExp = new RegExp(".*" + search + ".*", "i");
 
-    const filter = { date: date, "batch.name": { $regex: searchRegExp } };
+    const filter = date
+      ? { date: date, "batch.name": { $regex: searchRegExp } }
+      : { "batch.name": { $regex: searchRegExp } };
 
     const attendances = await Attendance.find(filter)
       .limit(limit)

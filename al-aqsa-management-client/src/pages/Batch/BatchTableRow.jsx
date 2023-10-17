@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { ModalContext } from "../../contextApi/ModalContextApi";

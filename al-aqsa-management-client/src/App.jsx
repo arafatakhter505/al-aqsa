@@ -19,7 +19,9 @@ import {
   UpdateMember,
   UpdateProfile,
   UpdateStudent,
+  UpdateAttendance,
   UpdateUser,
+  AttendanceDetails,
 } from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -77,6 +79,16 @@ const App = () => {
             <Route path="/add-attendance" element={<AccessRoute />}>
               <Route path="/add-attendance" element={<AddAttendance />} />
             </Route>
+            <Route path="/update-attendance" element={<AccessRoute />}>
+              <Route
+                path="/update-attendance/:id"
+                element={<UpdateAttendance />}
+              />
+            </Route>
+            <Route
+              path="/attendance-details/:id"
+              element={<AttendanceDetails />}
+            />
             {routes
               .filter((item) => item.show.indexOf(user?.role) !== -1)
               .map((route, index) => {

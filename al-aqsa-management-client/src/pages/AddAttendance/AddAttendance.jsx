@@ -1,12 +1,42 @@
-import { useState } from "react";
-import { PageHeader, Spinner } from "../../components";
-import { AiOutlinePhone, AiOutlineUser } from "react-icons/ai";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { useEffect, useState } from "react";
+import { PageHeader } from "../../components";
+import AddAttendanceTable from "./AddAttendanceTable";
 import dev from "../../config";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const AddAttendance = () => {
+  const [allBatch, setAllBatch] = useState([]);
+  const [batch, setBatch] = useState("");
+
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    fetch(`${dev.serverUrl}/api/batch`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllBatch(data.batch);
+        setBatch(data.batch[0]._id);
+      });
+  }, []);
+
+  const { isLoading, refetch } = useQuery({
+    queryKey: ["students"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(`${dev.serverUrl}/api/students?batch=${batch}`);
+        const data = await res.json();
+        setStudents(data.students);
+        return data;
+      } catch (error) {
+        toast.error(error.message);
+      }
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [batch]);
+
   return (
     <div>
       <PageHeader
@@ -15,7 +45,13 @@ const AddAttendance = () => {
         icon="back"
         path="/attendance"
       />
-      <h2>add attendance</h2>
+      <AddAttendanceTable
+        allBatch={allBatch}
+        batch={batch}
+        setBatch={setBatch}
+        students={students}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

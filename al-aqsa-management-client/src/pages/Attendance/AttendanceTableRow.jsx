@@ -13,6 +13,14 @@ const AttendanceTableRow = ({ attendance, index, refetch }) => {
     useContext(ModalContext);
   const checkOddNumber = (index + 1) % 2 === 0 ? true : false;
 
+  let totalPresent = 0;
+  let totalAbsent = 0;
+
+  attendance &&
+    attendance.students.map((student) =>
+      student.attendance ? (totalPresent += 1) : (totalAbsent += 1)
+    );
+
   const access =
     user.role === "Super Admin" ||
     user.role === "Admin" ||
@@ -55,10 +63,16 @@ const AttendanceTableRow = ({ attendance, index, refetch }) => {
     >
       <td className="py-3 px-6 text-left whitespace-nowrap">
         {new Date(attendance?.date).toDateString()}
+        <Link
+          to={`/attendance-details/${attendance?._id}`}
+          className="bg-[#1C2434] text-[#C6CCD7] px-1 rounded-md ml-2"
+        >
+          Details
+        </Link>
       </td>
       <td className="py-3 px-6 text-left">{attendance?.batch?.name}</td>
-      <td className="py-3 px-6 text-center">0</td>
-      <td className="py-3 px-6 text-center">0</td>
+      <td className="py-3 px-6 text-center">{totalPresent}</td>
+      <td className="py-3 px-6 text-center">{totalAbsent}</td>
       <td className="py-3 px-6 text-center">
         {new Date(attendance?.updatedAt).toDateString()}
       </td>

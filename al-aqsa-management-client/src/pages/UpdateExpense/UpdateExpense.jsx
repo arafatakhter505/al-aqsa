@@ -104,7 +104,9 @@ const UpdateExpense = () => {
                 <input
                   type="date"
                   placeholder="Enter date"
-                  value={`${year}-${month}-${day > 9 ? day : "0" + day}`}
+                  value={`${year}-${month > 9 ? month : "0" + month}-${
+                    day > 9 ? day : "0" + day
+                  }`}
                   onChange={(e) => setDate(e.target.value)}
                   className="w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                 />
