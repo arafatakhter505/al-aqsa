@@ -28,7 +28,7 @@ const UpdateBatch = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/batch/${id}`, {
-        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+        headers: { authorization: `Bearer ${dev.jwt}` },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -64,7 +64,7 @@ const UpdateBatch = () => {
       const response = await fetch(`${dev.serverUrl}/api/batch/${id}`, {
         method: "PUT",
         headers: {
-          authorization: `Bearer ${document.cookie.split("=")[1]}`,
+          authorization: `Bearer ${dev.jwt}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateInfo),

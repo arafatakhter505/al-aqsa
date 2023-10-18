@@ -24,7 +24,7 @@ const ExpenseTableRow = ({ expense, index, refetch }) => {
         `${dev.serverUrl}/api/expenses/${expense?._id}`,
         {
           method: "DELETE",
-          headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+          headers: { authorization: `Bearer ${dev.jwt}` },
         }
       );
       const deleteExpense = await response.json();

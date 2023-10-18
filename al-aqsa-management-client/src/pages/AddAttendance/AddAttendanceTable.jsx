@@ -31,7 +31,7 @@ const AddAttendanceTable = ({
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/batch/${batch}`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => setGetBatch(data.batch));
@@ -56,7 +56,7 @@ const AddAttendanceTable = ({
         {
           method: "POST",
           headers: {
-            authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            authorization: `Bearer ${dev.jwt}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(attendance),

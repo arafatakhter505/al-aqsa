@@ -4,7 +4,7 @@ const verifyAdmin = async (req, res, next) => {
   const decodedEmail = req.decoded.email;
   const filter = { email: decodedEmail };
   const user = await User.findOne(filter);
-  console.log(user);
+
   if (user?.role === "Admin" || user?.role === "Super Admin") {
     next();
   } else {

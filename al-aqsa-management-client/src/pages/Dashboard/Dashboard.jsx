@@ -10,19 +10,19 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/members`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => setMembers(data.members));
 
     fetch(`${dev.serverUrl}/api/expenses`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => setExpense(data.expenses));
 
     fetch(`${dev.serverUrl}/api/donation`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => setDonation(data.donations));

@@ -19,7 +19,7 @@ const UpdateStudent = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/students/${id}`, {
-        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+        headers: { authorization: `Bearer ${dev.jwt}` },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -50,7 +50,7 @@ const UpdateStudent = () => {
       const response = await fetch(`${dev.serverUrl}/api/students/${id}`, {
         method: "PUT",
         headers: {
-          authorization: `Bearer ${document.cookie.split("=")[1]}`,
+          authorization: `Bearer ${dev.jwt}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateInfo),

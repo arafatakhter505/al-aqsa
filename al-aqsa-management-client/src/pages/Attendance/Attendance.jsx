@@ -22,7 +22,7 @@ const Attendance = () => {
           `${dev.serverUrl}/api/attendances?search=${search}&limit=${limit}&page=${page}&date=${date}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

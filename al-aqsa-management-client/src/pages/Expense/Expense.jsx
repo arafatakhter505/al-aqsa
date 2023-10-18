@@ -21,7 +21,7 @@ const Expense = () => {
           `${dev.serverUrl}/api/expenses?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

@@ -14,7 +14,7 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     setAuthUser(JSON.parse(getUser || JSON.stringify({})));
     fetch(`${dev.serverUrl}/api/users/${authUser?._id}`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => data.success && setUser(data.user));
@@ -32,8 +32,10 @@ const UserContext = ({ children }) => {
     const loginUser = await response.json();
     if (loginUser.success) {
       setAuthUser({ _id: loginUser.user._id });
-      localStorage.setItem("user", JSON.stringify({ _id: loginUser.user._id }));
-      document.cookie = `token=${loginUser.token}`;
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ _id: loginUser.user._id, token: loginUser.token })
+      );
     }
     return loginUser;
   };
@@ -42,7 +44,6 @@ const UserContext = ({ children }) => {
   const logout = () => {
     localStorage.setItem("user", JSON.stringify({}));
     setAuthUser("");
-    document.cookie = `token=${null}`;
   };
 
   const authInfo = {

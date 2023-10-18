@@ -6,7 +6,7 @@ const TrainerInfo = ({ id }) => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/batch/${id}`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => setTrainer(data.batch.trainer));

@@ -6,6 +6,7 @@ import Loading from "./Loading/Loading";
 import DashboardCard from "./DashboardCard/DashboardCard";
 import MonthChart from "./MonthChart/MonthChart";
 import FilterChart from "./FilterChart/FilterChart";
+import PreLoader from "./PreLoader/PreLoader";
 
 export {
   Sidebar,
@@ -16,4 +17,5 @@ export {
   DashboardCard,
   MonthChart,
   FilterChart,
+  PreLoader,
 };

@@ -250,9 +250,7 @@ const userLogin = async (req, res) => {
 
     const secretKey = dev.app.jwtSecretKey;
 
-    const token = createJWT({ email: existingUser.email }, secretKey, {
-      expiresIn: "7d",
-    });
+    const token = createJWT({ email: existingUser.email }, secretKey);
 
     return res.status(200).json({
       success: true,

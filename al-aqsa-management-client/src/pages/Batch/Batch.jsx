@@ -19,7 +19,7 @@ const Batch = () => {
           `${dev.serverUrl}/api/batch?search=${search}&limit=${limit}&page=${page}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

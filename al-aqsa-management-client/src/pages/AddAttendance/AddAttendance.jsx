@@ -14,7 +14,7 @@ const AddAttendance = () => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/batch`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -31,7 +31,7 @@ const AddAttendance = () => {
           `${dev.serverUrl}/api/students?batch=${batch}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

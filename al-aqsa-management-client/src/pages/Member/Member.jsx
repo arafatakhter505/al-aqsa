@@ -19,7 +19,7 @@ const Member = () => {
           `${dev.serverUrl}/api/members?search=${search}&limit=${limit}&page=${page}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

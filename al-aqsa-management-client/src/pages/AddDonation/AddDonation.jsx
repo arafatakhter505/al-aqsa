@@ -21,7 +21,7 @@ const AddDonation = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/members`, {
-        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+        headers: { authorization: `Bearer ${dev.jwt}` },
       })
         .then((res) => res.json())
         .then((data) => setMembers(data.members));
@@ -55,7 +55,7 @@ const AddDonation = () => {
         {
           method: "POST",
           headers: {
-            authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            authorization: `Bearer ${dev.jwt}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(donation),

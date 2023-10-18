@@ -11,7 +11,7 @@ const DropdownUser = () => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/users/${authUser?._id}`, {
-      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      headers: { authorization: `Bearer ${dev.jwt}` },
     })
       .then((res) => res.json())
       .then((data) => setGetUser(data.user));

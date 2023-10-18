@@ -15,7 +15,7 @@ const UserTableRow = ({ user, index, refetch }) => {
     try {
       const response = await fetch(`${dev.serverUrl}/api/users/${user?._id}`, {
         method: "DELETE",
-        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+        headers: { authorization: `Bearer ${dev.jwt}` },
       });
       const deleteUser = await response.json();
       if (deleteUser.success) {

@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const dev = require("../config");
 
-const createJWT = (payload, secretKey, expireIn) => {
-  const token = jwt.sign(payload, secretKey, expireIn);
+const createJWT = (payload, secretKey) => {
+  const token = jwt.sign(payload, secretKey);
   return token;
 };
 
@@ -14,7 +14,6 @@ const verifyJWT = async (req, res, next) => {
       .json({ success: false, message: "unauthorized access" });
   }
   const token = authHeader.split(" ")[1];
-  console.log(token);
 
   jwt.verify(token, dev.app.jwtSecretKey, (err, decoded) => {
     if (err) {

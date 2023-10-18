@@ -15,7 +15,7 @@ const UpdateAttendance = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/attendances/${id}`, {
-        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+        headers: { authorization: `Bearer ${dev.jwt}` },
       })
         .then((res) => res.json())
         .then((data) => {

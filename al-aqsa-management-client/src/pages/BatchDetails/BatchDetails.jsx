@@ -22,7 +22,7 @@ const BatchDetails = () => {
           `${dev.serverUrl}/api/students?search=${search}&limit=${limit}&page=${page}&batch=${id}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

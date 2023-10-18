@@ -27,7 +27,7 @@ const FilterChart = () => {
           `${dev.serverUrl}/api/donation?from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );
@@ -37,7 +37,7 @@ const FilterChart = () => {
           `${dev.serverUrl}/api/expenses?from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

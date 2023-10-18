@@ -21,7 +21,7 @@ const Donation = () => {
           `${dev.serverUrl}/api/donation?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+              authorization: `Bearer ${dev.jwt}`,
             },
           }
         );

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Logo } from "../../assets";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -91,9 +91,12 @@ const Login = () => {
               </label>
             </div>
             <div>
-              <Link to={"/"}>
-                <em>Forgot Password?</em>
-              </Link>
+              <em
+                className="cursor-pointer"
+                onClick={() => toast.success("Please Contact Admin")}
+              >
+                Forgot Password?
+              </em>
             </div>
           </div>
           <button
