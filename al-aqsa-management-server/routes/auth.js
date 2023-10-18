@@ -6,14 +6,15 @@ const {
   getUserById,
   deleteUser,
 } = require("../controllers/auth");
+const verifyAdmin = require("../helpers/admin");
 
 const userRouter = express.Router();
 
 // user register
-userRouter.post("/register", registerUser);
+userRouter.post("/register", verifyAdmin, registerUser);
 
 // get all users
-userRouter.get("/", getAllUsers);
+userRouter.get("/", verifyAdmin, getAllUsers);
 
 // get user by id
 userRouter.get("/:id", getUserById);
@@ -22,6 +23,6 @@ userRouter.get("/:id", getUserById);
 userRouter.put("/:id", updateUser);
 
 // delete user
-userRouter.delete("/:id", deleteUser);
+userRouter.delete("/:id", verifyAdmin, deleteUser);
 
 module.exports = userRouter;
