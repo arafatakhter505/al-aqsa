@@ -10,6 +10,8 @@ const expenseRouter = require("./routes/expense");
 const batchRouter = require("./routes/batch");
 const studentRouter = require("./routes/student");
 const attendanceRouter = require("./routes/attendance");
+const { verifyJWT } = require("./helpers/jwt");
+const { userLogin } = require("./controllers/auth");
 
 const app = express();
 
@@ -25,13 +27,16 @@ app.use(cors());
 app.use(express.json());
 
 // routes middleware
-app.use("/api/users", userRouter);
-app.use("/api/members", memberRouter);
-app.use("/api/donation", donationRouter);
-app.use("/api/expenses", expenseRouter);
-app.use("/api/batch", batchRouter);
-app.use("/api/students", studentRouter);
-app.use("/api/attendances", attendanceRouter);
+app.use("/api/users", verifyJWT, userRouter);
+app.use("/api/members", verifyJWT, memberRouter);
+app.use("/api/donation", verifyJWT, donationRouter);
+app.use("/api/expenses", verifyJWT, expenseRouter);
+app.use("/api/batch", verifyJWT, batchRouter);
+app.use("/api/students", verifyJWT, studentRouter);
+app.use("/api/attendances", verifyJWT, attendanceRouter);
+
+// user login
+app.post("/api/login", userLogin);
 
 app.get("/", (req, res) => res.send("Al Aqsa Server Application"));
 

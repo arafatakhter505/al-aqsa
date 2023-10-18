@@ -16,7 +16,9 @@ const AddStudent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/batch/${id}`)
+    fetch(`${dev.serverUrl}/api/batch/${id}`, {
+      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+    })
       .then((res) => res.json())
       .then((data) => setBatchName(data.batch.name));
   }, []);
@@ -44,6 +46,7 @@ const AddStudent = () => {
         {
           method: "POST",
           headers: {
+            authorization: `Bearer ${document.cookie.split("=")[1]}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(student),

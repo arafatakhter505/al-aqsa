@@ -24,12 +24,22 @@ const FilterChart = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/donation?from=${fromDate}&to=${toDate}`
+          `${dev.serverUrl}/api/donation?from=${fromDate}&to=${toDate}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const data = await res.json();
         setDonation(data);
         const exRes = await fetch(
-          `${dev.serverUrl}/api/expenses?from=${fromDate}&to=${toDate}`
+          `${dev.serverUrl}/api/expenses?from=${fromDate}&to=${toDate}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const exData = await exRes.json();
         setExpense(exData);

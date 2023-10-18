@@ -19,7 +19,12 @@ const BatchDetails = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/students?search=${search}&limit=${limit}&page=${page}&batch=${id}`
+          `${dev.serverUrl}/api/students?search=${search}&limit=${limit}&page=${page}&batch=${id}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const data = await res.json();
         setGetData(data);

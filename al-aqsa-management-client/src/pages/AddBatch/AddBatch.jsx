@@ -38,6 +38,7 @@ const AddBatch = () => {
       const response = await fetch(`${dev.serverUrl}/api/batch/add-batch`, {
         method: "POST",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(batch),

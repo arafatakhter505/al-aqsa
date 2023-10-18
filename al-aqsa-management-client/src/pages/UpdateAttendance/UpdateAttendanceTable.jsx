@@ -31,6 +31,7 @@ const UpdateAttendanceTable = ({ attendance, date, setDate }) => {
       const response = await fetch(`${dev.serverUrl}/api/attendances/${id}`, {
         method: "PUT",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(UpdateInfo),

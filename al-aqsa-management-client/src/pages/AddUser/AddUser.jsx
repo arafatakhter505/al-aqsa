@@ -56,6 +56,7 @@ const AddUser = () => {
       const response = await fetch(`${dev.serverUrl}/api/users/register`, {
         method: "POST",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),

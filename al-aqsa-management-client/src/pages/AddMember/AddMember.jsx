@@ -30,6 +30,7 @@ const AddMember = () => {
       const response = await fetch(`${dev.serverUrl}/api/members/add-member`, {
         method: "POST",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(member),

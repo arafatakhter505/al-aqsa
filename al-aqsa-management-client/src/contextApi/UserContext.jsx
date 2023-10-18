@@ -13,14 +13,16 @@ const UserContext = ({ children }) => {
 
   useEffect(() => {
     setAuthUser(JSON.parse(getUser || JSON.stringify({})));
-    fetch(`${dev.serverUrl}/api/users/${authUser?._id}`)
+    fetch(`${dev.serverUrl}/api/users/${authUser?._id}`, {
+      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+    })
       .then((res) => res.json())
       .then((data) => data.success && setUser(data.user));
   }, [getUser]);
 
   // login
   const login = async (userName, password) => {
-    const response = await fetch(`${dev.serverUrl}/api/users/login`, {
+    const response = await fetch(`${dev.serverUrl}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,6 +33,7 @@ const UserContext = ({ children }) => {
     if (loginUser.success) {
       setAuthUser({ _id: loginUser.user._id });
       localStorage.setItem("user", JSON.stringify({ _id: loginUser.user._id }));
+      document.cookie = `token=${loginUser.token}`;
     }
     return loginUser;
   };
@@ -39,6 +42,7 @@ const UserContext = ({ children }) => {
   const logout = () => {
     localStorage.setItem("user", JSON.stringify({}));
     setAuthUser("");
+    document.cookie = `token=${null}`;
   };
 
   const authInfo = {

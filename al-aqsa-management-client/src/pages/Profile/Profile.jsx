@@ -8,7 +8,9 @@ const Profile = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/users/${id}`)
+    fetch(`${dev.serverUrl}/api/users/${id}`, {
+      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+    })
       .then((res) => res.json())
       .then((data) => setUser(data.user));
   }, []);

@@ -8,7 +8,9 @@ const AttendanceDetails = () => {
   const [attendance, setAttendance] = useState({});
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/attendances/${id}`)
+    fetch(`${dev.serverUrl}/api/attendances/${id}`, {
+      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+    })
       .then((res) => res.json())
       .then((data) => setAttendance(data.attendance));
   }, []);

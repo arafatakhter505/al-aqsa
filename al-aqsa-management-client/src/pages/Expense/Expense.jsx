@@ -18,7 +18,12 @@ const Expense = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/expenses?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`
+          `${dev.serverUrl}/api/expenses?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const data = await res.json();
         setGetData(data);

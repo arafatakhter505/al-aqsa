@@ -24,7 +24,9 @@ const UpdateExpense = () => {
 
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/members`)
+      fetch(`${dev.serverUrl}/api/members`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => setMembers(data.members));
     } catch (error) {
@@ -41,7 +43,9 @@ const UpdateExpense = () => {
   // get expense
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/expenses/${id}`)
+      fetch(`${dev.serverUrl}/api/expenses/${id}`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => {
           setDate(data.expense.date);
@@ -68,6 +72,7 @@ const UpdateExpense = () => {
       const response = await fetch(`${dev.serverUrl}/api/expenses/${id}`, {
         method: "PUT",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateExpneseInfo),

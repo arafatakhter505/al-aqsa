@@ -21,7 +21,9 @@ const UpdateUser = () => {
   // get user
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/users/${id}`)
+      fetch(`${dev.serverUrl}/api/users/${id}`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => {
           setFullName(data.user.fullName);
@@ -58,6 +60,7 @@ const UpdateUser = () => {
       const response = await fetch(`${dev.serverUrl}/api/users/${id}`, {
         method: "PUT",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateUserInfo),

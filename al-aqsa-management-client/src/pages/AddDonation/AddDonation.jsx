@@ -20,7 +20,9 @@ const AddDonation = () => {
 
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/members`)
+      fetch(`${dev.serverUrl}/api/members`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => setMembers(data.members));
     } catch (error) {
@@ -53,6 +55,7 @@ const AddDonation = () => {
         {
           method: "POST",
           headers: {
+            authorization: `Bearer ${document.cookie.split("=")[1]}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(donation),

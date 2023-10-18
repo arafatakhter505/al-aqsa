@@ -16,7 +16,12 @@ const Member = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/members?search=${search}&limit=${limit}&page=${page}`
+          `${dev.serverUrl}/api/members?search=${search}&limit=${limit}&page=${page}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const data = await res.json();
         setGetData(data);

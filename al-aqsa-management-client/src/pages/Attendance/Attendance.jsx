@@ -19,7 +19,12 @@ const Attendance = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/attendances?search=${search}&limit=${limit}&page=${page}&date=${date}`
+          `${dev.serverUrl}/api/attendances?search=${search}&limit=${limit}&page=${page}&date=${date}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const data = await res.json();
         setGetData(data);

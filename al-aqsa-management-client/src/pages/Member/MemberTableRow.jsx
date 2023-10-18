@@ -24,6 +24,7 @@ const MemberTableRow = ({ member, index, refetch }) => {
         `${dev.serverUrl}/api/members/${member?._id}`,
         {
           method: "DELETE",
+          headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
         }
       );
       const deleteMember = await response.json();

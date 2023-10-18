@@ -24,7 +24,9 @@ const UpdateDonation = () => {
 
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/members`)
+      fetch(`${dev.serverUrl}/api/members`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => setMembers(data.members));
     } catch (error) {
@@ -41,7 +43,9 @@ const UpdateDonation = () => {
   // get donation
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/donation/${id}`)
+      fetch(`${dev.serverUrl}/api/donation/${id}`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => {
           setDate(data.donation.date);
@@ -68,6 +72,7 @@ const UpdateDonation = () => {
       const response = await fetch(`${dev.serverUrl}/api/donation/${id}`, {
         method: "PUT",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateDonationInfo),

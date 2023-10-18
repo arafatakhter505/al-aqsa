@@ -24,6 +24,7 @@ const BatchDetailsTableRow = ({ student, index, refetch }) => {
         `${dev.serverUrl}/api/students/${student?._id}`,
         {
           method: "DELETE",
+          headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
         }
       );
       const deleteStudent = await response.json();

@@ -27,7 +27,9 @@ const UpdateBatch = () => {
   // get batch
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/batch/${id}`)
+      fetch(`${dev.serverUrl}/api/batch/${id}`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => {
           setName(data.batch.name);
@@ -62,6 +64,7 @@ const UpdateBatch = () => {
       const response = await fetch(`${dev.serverUrl}/api/batch/${id}`, {
         method: "PUT",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateInfo),

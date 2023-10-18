@@ -13,7 +13,9 @@ const AddAttendance = () => {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/batch`)
+    fetch(`${dev.serverUrl}/api/batch`, {
+      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+    })
       .then((res) => res.json())
       .then((data) => {
         setAllBatch(data.batch);
@@ -25,7 +27,14 @@ const AddAttendance = () => {
     queryKey: ["students"],
     queryFn: async () => {
       try {
-        const res = await fetch(`${dev.serverUrl}/api/students?batch=${batch}`);
+        const res = await fetch(
+          `${dev.serverUrl}/api/students?batch=${batch}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
+        );
         const data = await res.json();
         setStudents(data.students);
         return data;

@@ -18,7 +18,12 @@ const Donation = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${dev.serverUrl}/api/donation?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`
+          `${dev.serverUrl}/api/donation?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`,
+          {
+            headers: {
+              authorization: `Bearer ${document.cookie.split("=")[1]}`,
+            },
+          }
         );
         const data = await res.json();
         setGetData(data);

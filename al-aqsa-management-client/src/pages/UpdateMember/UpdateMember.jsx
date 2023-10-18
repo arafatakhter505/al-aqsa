@@ -17,7 +17,9 @@ const UpdateMember = () => {
   // get member
   useEffect(() => {
     try {
-      fetch(`${dev.serverUrl}/api/members/${id}`)
+      fetch(`${dev.serverUrl}/api/members/${id}`, {
+        headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+      })
         .then((res) => res.json())
         .then((data) => {
           setName(data.member.name);
@@ -44,6 +46,7 @@ const UpdateMember = () => {
       const response = await fetch(`${dev.serverUrl}/api/members/${id}`, {
         method: "PUT",
         headers: {
+          authorization: `Bearer ${document.cookie.split("=")[1]}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateInfo),

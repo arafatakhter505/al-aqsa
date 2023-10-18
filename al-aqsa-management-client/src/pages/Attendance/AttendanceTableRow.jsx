@@ -33,6 +33,7 @@ const AttendanceTableRow = ({ attendance, index, refetch }) => {
         `${dev.serverUrl}/api/attendances/${attendance?._id}`,
         {
           method: "DELETE",
+          headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
         }
       );
       const deleteAttendance = await response.json();

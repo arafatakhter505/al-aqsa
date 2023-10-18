@@ -30,7 +30,9 @@ const AddAttendanceTable = ({
   const [handleAttendance, setHandleAttendance] = useState(studentsAttendance);
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/batch/${batch}`)
+    fetch(`${dev.serverUrl}/api/batch/${batch}`, {
+      headers: { authorization: `Bearer ${document.cookie.split("=")[1]}` },
+    })
       .then((res) => res.json())
       .then((data) => setGetBatch(data.batch));
   }, [batch]);
@@ -54,6 +56,7 @@ const AddAttendanceTable = ({
         {
           method: "POST",
           headers: {
+            authorization: `Bearer ${document.cookie.split("=")[1]}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(attendance),
