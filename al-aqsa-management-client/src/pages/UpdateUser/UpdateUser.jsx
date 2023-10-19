@@ -24,7 +24,7 @@ const UpdateUser = () => {
       fetch(`${dev.serverUrl}/api/users/${id}`, {
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
         },
       })
@@ -65,7 +65,7 @@ const UpdateUser = () => {
         method: "PUT",
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
           "Content-Type": "application/json",
         },

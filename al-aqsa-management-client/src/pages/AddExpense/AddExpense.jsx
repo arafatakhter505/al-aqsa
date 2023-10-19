@@ -23,7 +23,7 @@ const AddExpense = () => {
       fetch(`${dev.serverUrl}/api/members`, {
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
         },
       })
@@ -60,7 +60,7 @@ const AddExpense = () => {
           method: "POST",
           headers: {
             authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("user")).token
+              JSON.parse(localStorage.getItem("user"))?.token
             }`,
             "Content-Type": "application/json",
           },

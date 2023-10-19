@@ -19,7 +19,7 @@ const AddStudent = () => {
     fetch(`${dev.serverUrl}/api/batch/id/${id}`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })
@@ -51,7 +51,7 @@ const AddStudent = () => {
           method: "POST",
           headers: {
             authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("user")).token
+              JSON.parse(localStorage.getItem("user"))?.token
             }`,
             "Content-Type": "application/json",
           },

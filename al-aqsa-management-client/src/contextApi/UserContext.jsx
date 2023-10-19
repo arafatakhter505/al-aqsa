@@ -16,7 +16,7 @@ const UserContext = ({ children }) => {
     fetch(`${dev.serverUrl}/api/users/${authUser?._id}`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })

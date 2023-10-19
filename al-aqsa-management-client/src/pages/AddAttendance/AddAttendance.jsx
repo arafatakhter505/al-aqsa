@@ -16,7 +16,7 @@ const AddAttendance = () => {
     fetch(`${dev.serverUrl}/api/batch`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })
@@ -36,7 +36,7 @@ const AddAttendance = () => {
           {
             headers: {
               authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("user")).token
+                JSON.parse(localStorage.getItem("user"))?.token
               }`,
             },
           }

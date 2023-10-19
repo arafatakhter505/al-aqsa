@@ -32,7 +32,7 @@ const UpdateAttendanceTable = ({ attendance, date, setDate }) => {
         method: "PUT",
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
           "Content-Type": "application/json",
         },

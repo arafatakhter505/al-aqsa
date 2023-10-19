@@ -24,7 +24,7 @@ const BatchTableRow = ({ batch, index, refetch }) => {
         method: "DELETE",
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
         },
       });

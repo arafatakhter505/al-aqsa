@@ -33,7 +33,7 @@ const AddAttendanceTable = ({
     fetch(`${dev.serverUrl}/api/batch/id/${batch}`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })
@@ -61,7 +61,7 @@ const AddAttendanceTable = ({
           method: "POST",
           headers: {
             authorization: `Bearer ${
-              JSON.parse(localStorage.getItem("user")).token
+              JSON.parse(localStorage.getItem("user"))?.token
             }`,
             "Content-Type": "application/json",
           },

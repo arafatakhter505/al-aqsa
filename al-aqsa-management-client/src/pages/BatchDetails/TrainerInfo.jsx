@@ -8,7 +8,7 @@ const TrainerInfo = ({ id }) => {
     fetch(`${dev.serverUrl}/api/batch/id/${id}`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })

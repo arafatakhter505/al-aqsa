@@ -27,7 +27,7 @@ const UpdateExpense = () => {
       fetch(`${dev.serverUrl}/api/members`, {
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
         },
       })
@@ -50,7 +50,7 @@ const UpdateExpense = () => {
       fetch(`${dev.serverUrl}/api/expenses/${id}`, {
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
         },
       })
@@ -81,7 +81,7 @@ const UpdateExpense = () => {
         method: "PUT",
         headers: {
           authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
+            JSON.parse(localStorage.getItem("user"))?.token
           }`,
           "Content-Type": "application/json",
         },

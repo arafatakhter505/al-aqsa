@@ -28,7 +28,7 @@ const FilterChart = () => {
           {
             headers: {
               authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("user")).token
+                JSON.parse(localStorage.getItem("user"))?.token
               }`,
             },
           }
@@ -40,7 +40,7 @@ const FilterChart = () => {
           {
             headers: {
               authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("user")).token
+                JSON.parse(localStorage.getItem("user"))?.token
               }`,
             },
           }

@@ -11,7 +11,7 @@ const AttendanceDetails = () => {
     fetch(`${dev.serverUrl}/api/attendances/${id}`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })

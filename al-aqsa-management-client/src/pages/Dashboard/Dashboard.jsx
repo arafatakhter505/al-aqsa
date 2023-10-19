@@ -12,7 +12,7 @@ const Dashboard = () => {
     fetch(`${dev.serverUrl}/api/members`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })
@@ -22,7 +22,7 @@ const Dashboard = () => {
     fetch(`${dev.serverUrl}/api/expenses`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })
@@ -32,7 +32,7 @@ const Dashboard = () => {
     fetch(`${dev.serverUrl}/api/donation`, {
       headers: {
         authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
+          JSON.parse(localStorage.getItem("user"))?.token
         }`,
       },
     })

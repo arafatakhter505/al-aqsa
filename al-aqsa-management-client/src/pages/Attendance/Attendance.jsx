@@ -23,7 +23,7 @@ const Attendance = () => {
           {
             headers: {
               authorization: `Bearer ${
-                JSON.parse(localStorage.getItem("user")).token
+                JSON.parse(localStorage.getItem("user"))?.token
               }`,
             },
           }
