@@ -27,7 +27,9 @@ const FilterChart = () => {
           `${dev.serverUrl}/api/donation?from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );
@@ -37,7 +39,9 @@ const FilterChart = () => {
           `${dev.serverUrl}/api/expenses?from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );

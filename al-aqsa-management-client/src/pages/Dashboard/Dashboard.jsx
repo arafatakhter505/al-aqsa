@@ -10,19 +10,31 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/members`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setMembers(data.members));
 
     fetch(`${dev.serverUrl}/api/expenses`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setExpense(data.expenses));
 
     fetch(`${dev.serverUrl}/api/donation`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setDonation(data.donations));

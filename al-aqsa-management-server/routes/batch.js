@@ -16,7 +16,7 @@ batchRouter.post("/add-batch", addBatch);
 batchRouter.get("/", getAllBatch);
 
 // get batch by id
-batchRouter.get("/:id", getBatchById);
+batchRouter.get("/id/:id", getBatchById);
 
 // update batch
 batchRouter.put("/:id", updateBatch);

@@ -9,7 +9,11 @@ const AttendanceDetails = () => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/attendances/${id}`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setAttendance(data.attendance));

@@ -19,7 +19,9 @@ const User = () => {
           `${dev.serverUrl}/api/users?search=${search}&limit=${limit}&page=${page}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );

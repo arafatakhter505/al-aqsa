@@ -22,7 +22,9 @@ const BatchDetails = () => {
           `${dev.serverUrl}/api/students?search=${search}&limit=${limit}&page=${page}&batch=${id}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );

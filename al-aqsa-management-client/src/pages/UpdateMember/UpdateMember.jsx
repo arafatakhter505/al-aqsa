@@ -18,7 +18,11 @@ const UpdateMember = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/members/${id}`, {
-        headers: { authorization: `Bearer ${dev.jwt}` },
+        headers: {
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -46,7 +50,9 @@ const UpdateMember = () => {
       const response = await fetch(`${dev.serverUrl}/api/members/${id}`, {
         method: "PUT",
         headers: {
-          authorization: `Bearer ${dev.jwt}`,
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateInfo),

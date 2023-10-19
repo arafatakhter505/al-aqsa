@@ -22,7 +22,11 @@ const BatchTableRow = ({ batch, index, refetch }) => {
     try {
       const response = await fetch(`${dev.serverUrl}/api/batch/${batch?._id}`, {
         method: "DELETE",
-        headers: { authorization: `Bearer ${dev.jwt}` },
+        headers: {
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
       });
       const deleteBatch = await response.json();
       if (deleteBatch.success) {

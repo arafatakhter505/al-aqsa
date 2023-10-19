@@ -19,7 +19,9 @@ const Batch = () => {
           `${dev.serverUrl}/api/batch?search=${search}&limit=${limit}&page=${page}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );

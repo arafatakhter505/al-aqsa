@@ -24,7 +24,11 @@ const MemberTableRow = ({ member, index, refetch }) => {
         `${dev.serverUrl}/api/members/${member?._id}`,
         {
           method: "DELETE",
-          headers: { authorization: `Bearer ${dev.jwt}` },
+          headers: {
+            authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
         }
       );
       const deleteMember = await response.json();

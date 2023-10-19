@@ -11,7 +11,7 @@ const AddUser = () => {
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("viewer");
+  const [role, setRole] = useState("Viewer");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userNameError, setUserNameError] = useState("");
@@ -56,7 +56,9 @@ const AddUser = () => {
       const response = await fetch(`${dev.serverUrl}/api/users/register`, {
         method: "POST",
         headers: {
-          authorization: `Bearer ${dev.jwt}`,
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),

@@ -9,7 +9,11 @@ const Profile = () => {
 
   useEffect(() => {
     fetch(`${dev.serverUrl}/api/users/${id}`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setUser(data.user));

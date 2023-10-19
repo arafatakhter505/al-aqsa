@@ -25,7 +25,11 @@ const UpdateDonation = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/members`, {
-        headers: { authorization: `Bearer ${dev.jwt}` },
+        headers: {
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
       })
         .then((res) => res.json())
         .then((data) => setMembers(data.members));
@@ -44,7 +48,11 @@ const UpdateDonation = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/donation/${id}`, {
-        headers: { authorization: `Bearer ${dev.jwt}` },
+        headers: {
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -72,7 +80,9 @@ const UpdateDonation = () => {
       const response = await fetch(`${dev.serverUrl}/api/donation/${id}`, {
         method: "PUT",
         headers: {
-          authorization: `Bearer ${dev.jwt}`,
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updateDonationInfo),

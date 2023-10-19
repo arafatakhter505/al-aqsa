@@ -21,7 +21,9 @@ const Donation = () => {
           `${dev.serverUrl}/api/donation?search=${search}&limit=${limit}&page=${page}&from=${fromDate}&to=${toDate}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );

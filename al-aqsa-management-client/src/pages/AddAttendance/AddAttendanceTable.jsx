@@ -30,8 +30,12 @@ const AddAttendanceTable = ({
   const [handleAttendance, setHandleAttendance] = useState(studentsAttendance);
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/batch/${batch}`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+    fetch(`${dev.serverUrl}/api/batch/id/${batch}`, {
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setGetBatch(data.batch));
@@ -56,12 +60,15 @@ const AddAttendanceTable = ({
         {
           method: "POST",
           headers: {
-            authorization: `Bearer ${dev.jwt}`,
+            authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(attendance),
         }
       );
+
       const createAttendance = await response.json();
       if (createAttendance.success) {
         toast.success(createAttendance.message);
@@ -78,7 +85,7 @@ const AddAttendanceTable = ({
     }
   };
 
-  return (
+  return allBatch ? (
     <div className="bg-white p-5 mb-6 rounded-md shadow">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-5 w-full">
         <div className="md:w-2/3 gap-5 flex flex-wrap md:flex-nowrap items-center justify-between">
@@ -142,6 +149,8 @@ const AddAttendanceTable = ({
         )
       )}
     </div>
+  ) : (
+    <div>No batch found</div>
   );
 };
 

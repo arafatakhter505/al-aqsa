@@ -31,7 +31,9 @@ const UpdateAttendanceTable = ({ attendance, date, setDate }) => {
       const response = await fetch(`${dev.serverUrl}/api/attendances/${id}`, {
         method: "PUT",
         headers: {
-          authorization: `Bearer ${dev.jwt}`,
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(UpdateInfo),

@@ -16,8 +16,12 @@ const AddStudent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/batch/${id}`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+    fetch(`${dev.serverUrl}/api/batch/id/${id}`, {
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setBatchName(data.batch.name));
@@ -46,7 +50,9 @@ const AddStudent = () => {
         {
           method: "POST",
           headers: {
-            authorization: `Bearer ${dev.jwt}`,
+            authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(student),

@@ -5,8 +5,12 @@ const TrainerInfo = ({ id }) => {
   const [trainer, setTrainer] = useState({});
 
   useEffect(() => {
-    fetch(`${dev.serverUrl}/api/batch/${id}`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+    fetch(`${dev.serverUrl}/api/batch/id/${id}`, {
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => setTrainer(data.batch.trainer));

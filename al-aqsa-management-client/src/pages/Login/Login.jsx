@@ -43,7 +43,7 @@ const Login = () => {
     <div className="bg-[#1C2434] min-h-screen flex items-center justify-center">
       <div className="md:w-[385px] w-full mx-5 bg-white px-5 pb-5 pt-2 rounded shadow-2xl relative">
         <div className="flex justify-center h-[140px]">
-          <img src={Logo} alt="Logo" className="w-[140px]" />
+          <img src={Logo} alt="" className="w-[140px]" />
         </div>
         <form onSubmit={handleLogin}>
           {/* User Name Start */}

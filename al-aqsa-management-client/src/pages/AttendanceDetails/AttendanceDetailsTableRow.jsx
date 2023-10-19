@@ -8,7 +8,9 @@ const AttendanceDetailsTableRow = ({ student, index }) => {
       }`}
     >
       <td className="py-3 px-6 text-left whitespace-nowrap">{student?.name}</td>
-      <td className="py-3 px-6 text-left">{`${student?.attendance}`}</td>
+      <td className="py-3 px-6 text-left">{`${
+        student?.attendance ? "Present" : "Absent"
+      }`}</td>
     </tr>
   );
 };

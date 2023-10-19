@@ -24,7 +24,11 @@ const ExpenseTableRow = ({ expense, index, refetch }) => {
         `${dev.serverUrl}/api/expenses/${expense?._id}`,
         {
           method: "DELETE",
-          headers: { authorization: `Bearer ${dev.jwt}` },
+          headers: {
+            authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
         }
       );
       const deleteExpense = await response.json();

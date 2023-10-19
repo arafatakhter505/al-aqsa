@@ -24,7 +24,11 @@ const DonationTableRow = ({ donation, index, refetch }) => {
         `${dev.serverUrl}/api/donation/${donation?._id}`,
         {
           method: "DELETE",
-          headers: { authorization: `Bearer ${dev.jwt}` },
+          headers: {
+            authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
+          },
         }
       );
       const deleteDonation = await response.json();

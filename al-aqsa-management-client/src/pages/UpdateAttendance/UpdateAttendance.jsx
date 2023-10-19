@@ -15,7 +15,11 @@ const UpdateAttendance = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/attendances/${id}`, {
-        headers: { authorization: `Bearer ${dev.jwt}` },
+        headers: {
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {

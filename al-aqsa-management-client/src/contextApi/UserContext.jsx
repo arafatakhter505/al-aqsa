@@ -14,7 +14,11 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     setAuthUser(JSON.parse(getUser || JSON.stringify({})));
     fetch(`${dev.serverUrl}/api/users/${authUser?._id}`, {
-      headers: { authorization: `Bearer ${dev.jwt}` },
+      headers: {
+        authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
     })
       .then((res) => res.json())
       .then((data) => data.success && setUser(data.user));

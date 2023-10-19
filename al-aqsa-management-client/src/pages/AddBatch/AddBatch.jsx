@@ -38,7 +38,9 @@ const AddBatch = () => {
       const response = await fetch(`${dev.serverUrl}/api/batch/add-batch`, {
         method: "POST",
         headers: {
-          authorization: `Bearer ${dev.jwt}`,
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(batch),

@@ -30,7 +30,9 @@ const AddMember = () => {
       const response = await fetch(`${dev.serverUrl}/api/members/add-member`, {
         method: "POST",
         headers: {
-          authorization: `Bearer ${dev.jwt}`,
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(member),

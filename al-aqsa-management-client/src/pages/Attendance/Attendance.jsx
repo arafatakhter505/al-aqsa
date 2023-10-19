@@ -22,7 +22,9 @@ const Attendance = () => {
           `${dev.serverUrl}/api/attendances?search=${search}&limit=${limit}&page=${page}&date=${date}`,
           {
             headers: {
-              authorization: `Bearer ${dev.jwt}`,
+              authorization: `Bearer ${
+                JSON.parse(localStorage.getItem("user")).token
+              }`,
             },
           }
         );

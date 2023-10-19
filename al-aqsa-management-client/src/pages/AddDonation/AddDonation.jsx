@@ -21,7 +21,11 @@ const AddDonation = () => {
   useEffect(() => {
     try {
       fetch(`${dev.serverUrl}/api/members`, {
-        headers: { authorization: `Bearer ${dev.jwt}` },
+        headers: {
+          authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
       })
         .then((res) => res.json())
         .then((data) => setMembers(data.members));
@@ -55,7 +59,9 @@ const AddDonation = () => {
         {
           method: "POST",
           headers: {
-            authorization: `Bearer ${dev.jwt}`,
+            authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).token
+            }`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(donation),
