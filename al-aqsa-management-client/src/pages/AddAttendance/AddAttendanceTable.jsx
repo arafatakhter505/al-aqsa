@@ -88,7 +88,7 @@ const AddAttendanceTable = ({
   return allBatch ? (
     <div className="bg-white p-5 mb-6 rounded-md shadow">
       <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-5 w-full">
-        <div className="md:w-2/3 gap-5 flex flex-wrap md:flex-nowrap items-center justify-between">
+        <div className="md:w-2/3 w-full gap-5 flex flex-wrap md:flex-nowrap items-center justify-between">
           <div className="w-full">
             <input
               type="date"
